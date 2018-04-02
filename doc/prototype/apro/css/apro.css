@@ -1,0 +1,95 @@
+body {
+    padding-top: 50px;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    /*background-color: #f5f5f5;*/
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.footer .container {
+    width: auto;
+    max-width: 768px;
+    padding: 0 15px;
+}
+.container .text-muted {
+    /*margin: 20px 0;*/
+}
+
+.c-content{
+    margin-top: 10px;
+}
+
+
+
+
+.c-event{
+
+}
+
+.c-event .list-group-item-padding{
+    padding: 5px 0 5px 0;
+}
+.c-event .event-li{}
+
+.c-event .event-li span{
+    float: right;
+    margin-right: 30px;
+}
+
+.c-ed-content{
+
+}
+
+.c-cd-content .c-cd-head{
+    padding: 0px 0px 10px 0px;
+    font-size: 25px;
+}
+
+.c-cd-content .c-cd-body{
+    padding: 0px 10px;
+}
+
+.c-cd-content .c-cd-body p{
+    text-indent: 2em;
+    font-size: 14px !important;
+}
+
+
+
+.c-about{
+    padding-left: 0px;
+}
+
+.c-about .c-about-detail p{
+    text-indent: 2em;
+    font-size: 16px !important;
+}
+
+
+.c-contact{
+    padding-left: 0px;
+}
+
+.c-contact .c-contact-detail p{
+    font-size: 16px !important;
+}

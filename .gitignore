@@ -14,3 +14,5 @@ pro-tech-service-market-v2-platform/.project
 target/*
 /target/
 rebel.xml
+/.idea/
+*/.idea/*
