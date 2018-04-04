@@ -93,3 +93,68 @@ body {
 .c-contact .c-contact-detail p{
     font-size: 16px !important;
 }
+
+
+.c-sr-group{
+    padding: 30px;
+
+}
+
+.c-sr-group .c-search{
+
+}
+
+.c-sr-group .c-list{
+    padding-top: 10px;
+}
+
+.c-sr-category{
+
+}
+
+.c-sr-category .c-sr-category-list{
+
+
+}
+
+.c-sr-category .c-sr-category-list a{
+    white-space: nowrap;
+    color: #005aa0;
+}
+
+.c-sr-category .c-sr-category-list a :hover{
+    white-space: nowrap;
+    color: #e4393c;
+}
+
+.c-sr-category  .c-sr-category-label{
+    background: #f3f3f3;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
