@@ -201,7 +201,49 @@ body {
 }
 
 
+/* toolbar
+-------------------------------------
+   begin */
 
+.c-toolbar{
+
+}
+
+.c-toolbar-tabs{
+    position: fixed;
+    top: 50%;
+    z-index: 9990;
+    width: 0;
+    height: 100%;
+    right: 60px;
+
+
+}
+
+.c-toolbar-tab{
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 1px;
+    cursor: pointer;
+    background-color: #f9f8f8;
+    -webkit-border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+    border: 1px solid #dedede;
+}
+
+.c-toolbar-tab:hover{
+    background-color: #aa0606;
+    color: #fff;
+    border: 1px solid #aa0606;
+}
+
+.c-toolbar-tab .c-tab-text{
+
+}
 
 
 
