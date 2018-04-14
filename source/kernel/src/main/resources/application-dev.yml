@@ -3,7 +3,7 @@ spring :
          admin.enabled : true #MBeanServer
     datasource :
          driver-class-name : com.mysql.jdbc.Driver
-         url : jdbc:mysql://localhost:3306/webseed?useUnicode=true&characterEncoding=utf8&useSSL=false
+         url : jdbc:mysql://localhost:3306/apro?useUnicode=true&characterEncoding=utf8&useSSL=false
          username : root
          password : jiazhongjin
          #driver-class-name : org.h2.Driver
@@ -96,10 +96,10 @@ cpp :
     user :
          default-password : 11111
     file : 
-         dsk-path : D:/file-store/   #simple file directory
-         host : http://localhost/ #IP地址 指定文件存储的地址
+         dsk-path : c:/file-store/   #simple file directory
+         host : http://localhost:8888/ #IP地址 指定文件存储的地址
     temp-file :
-         temp-dsk-path : D:/temp-file-store/   #simple file directory
+         temp-dsk-path : c:/temp-file-store/   #simple file directory
          temp-host : http://localhost:9898/ #IP地址 指定文件存储的地址
     url :
          method-track-switch : true #true is on , false is off
@@ -119,7 +119,7 @@ cpp :
               - me.libme  # never set *
               - me.libme
     ueditor :
-         root-path : D:/file-store-ueditor/   #simple file directory
+         root-path : c:/file-store-ueditor/   #simple file directory
          host : http://localhost:8901/ #IP地址 指定文件存储的地址
     
     
