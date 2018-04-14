@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-CN"  xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
-<head th:replace="~{head::copy(~{::title},_,~{::style},_,_)}" >
+<html lang="zh-CN">
+<head>
     <title>吴江市文教牛津布厂</title>
     <meta name=”description” content="吴江市文教牛津布厂 牛津布厂"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,13 +35,27 @@
 
     <style type="text/css">
 
-        .s{}
+        .c-photo{
+            padding-left: 15px;
+            margin-top: 15px;
+
+        }
+
+        .c-photo .c-photo-list{
+
+        }
+
+        .c-photo .c-photo-img-wrapper img{
+            height: 180px;
+            display: block;
+        }
+
 
     </style>
 
 </head>
 <body>
-<div th:replace="~{navbar::copy}">
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -52,7 +66,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">吴江市文教牛津布厂</a>
+            <a class="navbar-brand" href="index.html">吴江市文教牛津布厂</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -64,7 +78,7 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-</div>
+
 
 <!--<div id="myCarousel" class="carousel " data-ride="carousel">-->
     <!--&lt;!&ndash; Indicators &ndash;&gt;-->
@@ -90,78 +104,82 @@
 
 <!-- Carousel
    ================================================== -->
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img class="first-slide" th:src="@{/apro/img/banner1.jpg}" src="apro/img/banner1.jpg" alt="First slide">
+
+<div class="row c-photo">
+
+    <div class="col-lg-2 c-photo-list">
+
+
+        <div class="">
+            <a href="#" class="thumbnail c-photo-img-wrapper">
+                <img src="apro/img/blue.jpg" alt="...">
+            </a>
         </div>
-        <div class="item">
-            <img class="second-slide" th:src="@{/apro/img/banner2.jpg}" src="apro/img/banner2.jpg" alt="Second slide">
+
+        <div class="">
+            <a href="#" class="thumbnail c-photo-img-wrapper">
+                <img src="apro/img/green.jpg" alt="...">
+            </a>
         </div>
-        <div class="item">
-            <img class="third-slide" th:src="@{/apro/img/banner3.jpg}" src="apro/img/banner3.jpg" alt="Third slide">
+
+        <div class="">
+            <a href="#" class="thumbnail c-photo-img-wrapper">
+                <img src="apro/img/red.jpg" alt="...">
+            </a>
         </div>
+
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div><!-- /.carousel -->
+
+    <div class="col-lg-10">
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 0px;">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img class="first-slide" src="apro/img/banner1.jpg" alt="First slide">
+                </div>
+                <div class="item">
+                    <img class="second-slide" src="apro/img/banner2.jpg" alt="Second slide">
+                </div>
+                <div class="item">
+                    <img class="third-slide" src="apro/img/banner3.jpg" alt="Third slide">
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div><!-- /.carousel -->
 
 
-<div class="container marketing">
+    </div>
 
-    <!-- Three columns of text below the carousel -->
-    <div class="row" th:remove="all-but-first">
-
-        <div class="col-lg-4" th:each="recMat : ${recMats}">
-            <a th:href="@{/portal/mat/detail(id=${recMat.id})}">
-                <img class="img-circle" th:src="@{/apro/img/blue.jpg}" src="apro/img/blue.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-            <h2>蓝色布料</h2>
-            <p>品名：F420菱形格-2</p>
-            <p>规格：420D*420D</p>
-        </div><!-- /.col-lg-4 -->
-
-
-        <div class="col-lg-4">
-            <a href="mat-detail.html"><img class="img-circle" th:src="@{/apro/img/blue.jpg}" src="apro/img/blue.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-            <h2>蓝色布料</h2>
-            <p>品名：F420菱形格-2</p>
-            <p>规格：420D*420D</p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <a href="mat-detail.html"><img class="img-circle" th:src="@{/apro/img/green.jpg}" src="apro/img/green.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-            <h2>绿色布料</h2>
-            <p>品名：F420菱形格-2</p>
-            <p>规格：420D*420D</p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <a href="mat-detail.html"><img class="img-circle" th:src="@{/apro/img/red.jpg}" src="apro/img/red.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-            <h2>红色布料</h2>
-            <p>品名：F420菱形格-2</p>
-            <p>规格：420D*420D</p>
-        </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-</div><!-- /.container -->
-
-<div th:replace="~{footer :: copy}">
-    <footer class="footer">
-        <div class="container">
-            <p class="text-muted">CopyRight © 2006-2010 吴江市文教牛津布厂</p>
-            <p class="text-muted">联系电话：0512-63360065  13812691192  13405281040   传真：0512-63369849  地址：吴江市民营开发区八坼镇南刘路</p>
-        </div>
-    </footer>
 </div>
+
+
+
+
+
+
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">CopyRight © 2006-2010 吴江市文教牛津布厂</p>
+        <p class="text-muted">联系电话：0512-63360065  13812691192  13405281040   传真：0512-63369849  地址：吴江市民营开发区八坼镇南刘路</p>
+    </div>
+</footer>
+
+</body>
+
 
 <script type="text/javascript">
 

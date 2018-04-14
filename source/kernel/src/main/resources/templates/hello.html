@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="../static/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <script src="../jquery/jquery-3.2.1.js"></script>
+    <script src="../static/jquery/jquery-3.2.1.js"></script>
+
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.js"></script>
+
+
+    <style type="text/css">
+
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+
+        /* Sticky footer styles
+-------------------------------------------------- */
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 60px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            background-color: #f5f5f5;
+        }
+
+
+        /* Custom page CSS
+        -------------------------------------------------- */
+        /* Not required for template or sticky footer method. */
+
+        .container {
+            width: auto;
+            max-width: 80%;
+            padding: 0 15px;
+        }
+        .container .text-muted {
+            margin: 20px 0;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="container">
+
+    <p th:text="'Hello！, ' + ${name} + '!'">aha</p>
+
+
+</div><!-- /.container -->
+
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+    </div>
+</footer>
+
+</body>
+
+
+<script type="text/javascript">
+
+
+</script>
+
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="copy(title,links,style,script,seo)">
+
+    <title>吴江市文教牛津布厂</title>
+    <meta name=”description” th:content="${seo}" content="吴江市文教牛津布厂 牛津布厂"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- Bootstrap -->
+    <link th:href="@{/bootstrap/css/bootstrap.css}"   href="bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link th:href="@{/apro/css/carousel.css}" href="apro/css/carousel.css" rel="stylesheet" media="screen">
+
+    <link th:href="@{/apro/css/apro.css}" href="apro/css/apro.css" rel="stylesheet" media="screen">
+
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" media="screen">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link th:href="@{/assets/css/ie10-viewport-bug-workaround.css}" href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <th:block th:replace="${links}"></th:block>
+
+    <script th:src="@{/jquery/jquery-3.2.1.js}" src="jquery/jquery-3.2.1.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.js}" src="bootstrap/js/bootstrap.js"></script>
+
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script th:src="@{/assets/js/ie8-responsive-file-warning.js}" src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script th:src="@{/assets/js/ie-emulation-modes-warning.js}" src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script th:src="@{/assets/js/ie10-viewport-bug-workaround.js}" src="assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <th:block th:replace="${style}"></th:block>
+
+    <th:block th:replace="${script}"></th:block>
+
+
+</div>
+
+</body>
+
+</html>

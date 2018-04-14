@@ -1,0 +1,265 @@
+body {
+    padding-top: 50px;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    /*background-color: #f5f5f5;*/
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.footer .container {
+    width: auto;
+    max-width: 768px;
+    padding: 0 15px;
+}
+.container .text-muted {
+    /*margin: 20px 0;*/
+}
+
+/* all page root contains this class*/
+.c-content{
+    margin-top: 10px;
+}
+
+
+/* 公司动态
+--------------------------------------------------
+   开始*/
+.c-event{
+
+}
+
+.c-event .list-group-item-padding{
+    padding: 5px 0 5px 0;
+}
+.c-event .c-event-li{}
+
+.c-event .c-event-li span{
+    float: right;
+    margin-right: 30px;
+}
+
+/* 公司动态明细  ed <==> event detail
+--------------------------------------------------
+   开始*/
+
+.c-ed-content{
+
+}
+
+.c-cd-content .c-cd-head{
+    padding: 0px 0px 10px 0px;
+    font-size: 25px;
+}
+
+.c-cd-content .c-cd-body{
+    padding: 0px 10px;
+}
+
+.c-cd-content .c-cd-body p{
+    text-indent: 2em;
+    font-size: 14px !important;
+}
+
+
+/* 关于我们
+--------------------------------------------------
+   开始*/
+
+
+.c-about{
+    padding-left: 0px;
+}
+
+.c-about .c-about-detail p{
+    text-indent: 2em;
+    font-size: 16px !important;
+}
+
+/*  联系我们
+--------------------------------------------------
+   开始*/
+
+.c-contact{
+    padding-left: 0px;
+}
+
+.c-contact .c-contact-detail p{
+    font-size: 16px !important;
+}
+
+
+/*  我们的产品
+--------------------------------------------------
+   开始*/
+
+.c-sr-group{
+}
+
+.c-sr-group .c-sr-search{
+
+}
+.c-sr-search .c-sr-search-tgroup{
+    float: inherit;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.c-sr-category{
+
+    display: inline-block;
+    border: 1px solid #DDD;
+    margin-top: 15px;
+    background-color: rgb(249, 248, 248);
+}
+
+.c-sr-category .c-sr-category-list{
+    margin-left: 108px;
+    background-color: #fff;
+    display: table;
+}
+
+.c-sr-category .c-sr-category-list ul{
+
+    list-style: none;
+    display: inline;
+
+}
+
+.c-sr-category .c-sr-category-list ul li{
+
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 15px;
+}
+
+.c-sr-category .c-sr-category-list a{
+    white-space: nowrap;
+    color: #005aa0;
+}
+
+.c-sr-category .c-sr-category-list a:hover{
+    white-space: nowrap;
+    color: #e4393c;
+}
+
+.c-sr-category  .c-sr-category-label{
+    /*background: #f3f3f3;*/
+    float: left;
+    width: 100px;
+    line-height: 34px;
+    padding-left: 8px;
+
+}
+
+.c-mat-group{
+
+}
+
+.c-mat-group .c-mat-group-list{
+
+}
+
+.c-mat-group .c-mat-group-list a:hover img{
+
+    border: 1px solid #ddd;
+    padding: 4px;
+    max-width: 100%;
+    background-color: #fff;
+    transition: all .2s ease-in-out;
+
+}
+
+
+/*  产品明细 md <==> materials detail
+--------------------------------------------------
+   开始*/
+
+.c-md-content{
+
+
+}
+
+
+/* toolbar
+-------------------------------------
+   begin */
+
+.c-toolbar{
+
+}
+
+.c-toolbar-tabs{
+    position: fixed;
+    top: 50%;
+    z-index: 9990;
+    width: 0;
+    height: 100%;
+    right: 60px;
+
+
+}
+
+.c-toolbar-tab{
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 1px;
+    cursor: pointer;
+    background-color: #f9f8f8;
+    -webkit-border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+    border: 1px solid #dedede;
+}
+
+.c-toolbar-tab:hover{
+    background-color: #aa0606;
+    color: #fff;
+    border: 1px solid #aa0606;
+}
+
+.c-toolbar-tab .c-tab-text{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
