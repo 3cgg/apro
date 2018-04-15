@@ -41,6 +41,7 @@ public class AboutusService  {
 	 */
 	public String saveAboutUs (AboutUsRecord aboutUsRecord) throws Exception{
 		AboutUs aboutUs=toAboutUs(aboutUsRecord);
+		aboutUs.setId(null);
 		aboutUsRepo.saveOnly( aboutUs);
         return aboutUs.getId();
 	}

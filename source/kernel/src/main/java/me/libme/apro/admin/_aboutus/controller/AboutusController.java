@@ -1,9 +1,12 @@
 package me.libme.apro.admin._aboutus.controller;
 
 
+import me.libme.apro.admin._contactus.vo.ContactCriteria;
+import me.libme.apro.admin._contactus.vo.ContactRecord;
 import me.libme.kernel._c._m.JPage;
 import me.libme.kernel._c._m.SimplePageRequest;
 
+import me.libme.kernel._c.util.JStringUtils;
 import me.libme.webseed.web.ClosureException;
 import me.libme.webboot.ResponseModel;
 import me.libme.webseed.web.SimplePageRequestVO;
@@ -19,6 +22,7 @@ import me.libme.apro.admin._aboutus.vo.AboutUsCriteria;
 
 import me.libme.apro.admin._aboutus.service.AboutusService;
 
+import java.util.List;
 
 
 @Controller
@@ -48,7 +52,11 @@ public class AboutusController  {
 	@RequestMapping(path="/updateAboutUs",method=RequestMethod.POST)
 	public ResponseModel updateAboutUs (AboutUsRecord aboutUsRecord) throws Exception {
 		// do something validation on the aboutUsRecord.
-		aboutusService.updateAboutUs( aboutUsRecord);
+		if(JStringUtils.isNullOrEmpty(aboutUsRecord.getId())){
+			aboutusService.saveAboutUs(aboutUsRecord);
+		}else {
+			aboutusService.updateAboutUs(aboutUsRecord);
+		}
 		return ResponseModel.newSuccess(true);
 	}
 
@@ -69,7 +77,17 @@ public class AboutusController  {
 	@ResponseBody
 	@RequestMapping(path="/getAboutUsById",method=RequestMethod.GET)
 	public ResponseModel getAboutUsById (String id) throws Exception {
-		AboutUsRecord aboutUsRecord= aboutusService.getAboutUsById( id);
+		AboutUsRecord aboutUsRecord= null;
+		if(JStringUtils.isNullOrEmpty(id)){
+			List list=aboutusService.getAboutUssByPage(new AboutUsCriteria(),new SimplePageRequest(0,10)).getContent();
+			if(list.isEmpty()){
+//				contactRecord=new ContactRecord();
+			}else{
+				aboutUsRecord= (AboutUsRecord) list.get(0);
+			}
+		}else{
+			aboutUsRecord= aboutusService.getAboutUsById( id);
+		}
 		return ResponseModel.newSuccess().setData(aboutUsRecord);
 	}
 	
