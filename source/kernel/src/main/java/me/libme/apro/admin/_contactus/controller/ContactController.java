@@ -4,6 +4,7 @@ package me.libme.apro.admin._contactus.controller;
 import me.libme.kernel._c._m.JPage;
 import me.libme.kernel._c._m.SimplePageRequest;
 
+import me.libme.kernel._c.util.JStringUtils;
 import me.libme.webseed.web.ClosureException;
 import me.libme.webboot.ResponseModel;
 import me.libme.webseed.web.SimplePageRequestVO;
@@ -19,6 +20,7 @@ import me.libme.apro.admin._contactus.vo.ContactCriteria;
 
 import me.libme.apro.admin._contactus.service.ContactService;
 
+import java.util.List;
 
 
 @Controller
@@ -48,7 +50,12 @@ public class ContactController  {
 	@RequestMapping(path="/updateContact",method=RequestMethod.POST)
 	public ResponseModel updateContact (ContactRecord contactRecord) throws Exception {
 		// do something validation on the contactRecord.
-		contactService.updateContact( contactRecord);
+
+		if(JStringUtils.isNullOrEmpty(contactRecord.getId())){
+			contactService.saveContact(contactRecord);
+		}else{
+			contactService.updateContact( contactRecord);
+		}
 		return ResponseModel.newSuccess(true);
 	}
 
@@ -69,7 +76,17 @@ public class ContactController  {
 	@ResponseBody
 	@RequestMapping(path="/getContactById",method=RequestMethod.GET)
 	public ResponseModel getContactById (String id) throws Exception {
-		ContactRecord contactRecord= contactService.getContactById( id);
+		ContactRecord contactRecord=null;
+		if(JStringUtils.isNullOrEmpty(id)){
+			List list=contactService.getContactsByPage(new ContactCriteria(),new SimplePageRequest(0,10)).getContent();
+			if(list.isEmpty()){
+//				contactRecord=new ContactRecord();
+			}else{
+				contactRecord= (ContactRecord) list.get(0);
+			}
+		}else{
+			contactRecord= contactService.getContactById( id);
+		}
 		return ResponseModel.newSuccess().setData(contactRecord);
 	}
 	

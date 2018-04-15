@@ -41,6 +41,7 @@ public class ContactService  {
 	 */
 	public String saveContact (ContactRecord contactRecord) throws Exception{
 		Contact contact=toContact(contactRecord);
+		contact.setId(null);
 		contactRepo.saveOnly( contact);
         return contact.getId();
 	}
