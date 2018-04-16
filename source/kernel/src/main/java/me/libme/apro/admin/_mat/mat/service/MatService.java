@@ -56,7 +56,7 @@ public class MatService  {
         dbMat.setCode(matRecord.getCode());
         dbMat.setSize(matRecord.getSize());
         dbMat.setDescription(matRecord.getDescription());
-        dbMat.setImgUrl(matRecord.getImgUrl());
+        dbMat.setImgId(matRecord.getImgId());
         matRepo.updateOnly(dbMat);
 	}
 

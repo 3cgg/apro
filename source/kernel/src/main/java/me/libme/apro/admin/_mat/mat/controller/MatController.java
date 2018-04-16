@@ -4,6 +4,9 @@ package me.libme.apro.admin._mat.mat.controller;
 import me.libme.kernel._c._m.JPage;
 import me.libme.kernel._c._m.SimplePageRequest;
 
+import me.libme.kernel._c.util.JStringUtils;
+import me.libme.webseed._b._core.attachment.service.AttachmentService;
+import me.libme.webseed._b._core.attachment.vo.AttachmentRecordVO;
 import me.libme.webseed.web.ClosureException;
 import me.libme.webboot.ResponseModel;
 import me.libme.webseed.web.SimplePageRequestVO;
@@ -28,6 +31,9 @@ public class MatController  {
 
 	@Autowired
 	private MatService matService;
+
+	@Autowired
+	private AttachmentService attachmentService;
 
 
 	/**
@@ -70,6 +76,10 @@ public class MatController  {
 	@RequestMapping(path="/getMatById",method=RequestMethod.GET)
 	public ResponseModel getMatById (String id) throws Exception {
 		MatRecord matRecord= matService.getMatById( id);
+		if(JStringUtils.isNotNullOrEmpty(matRecord.getImgId())){
+			AttachmentRecordVO attachmentRecordVO= attachmentService.getAttachment(matRecord.getImgId());
+			matRecord.setImgFile(attachmentRecordVO);
+		}
 		return ResponseModel.newSuccess().setData(matRecord);
 	}
 	

@@ -15,8 +15,8 @@ import javax.persistence.Table;
 @DynamicUpdate
 public class Mat extends JBaseModel {
 
-    @Column(name = "img_url")
-    private String imgUrl;
+    @Column(name = "img_id")
+    private String imgId;
 
     @Column(name = "name")
     private String name;
@@ -30,12 +30,12 @@ public class Mat extends JBaseModel {
     @Column(name = "_desc")
     private String description;
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImgId() {
+        return imgId;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImgId(String imgId) {
+        this.imgId = imgId;
     }
 
     public String getName() {
