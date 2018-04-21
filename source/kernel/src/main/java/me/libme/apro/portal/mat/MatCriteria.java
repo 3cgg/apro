@@ -5,4 +5,6 @@ package me.libme.apro.portal.mat;
  */
 public class MatCriteria {
 
+
+
 }

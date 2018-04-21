@@ -1,22 +1,20 @@
 package me.libme.apro.admin._aboutus.service;
 
 
+import me.libme.apro.admin._aboutus.model.AboutUs;
+import me.libme.apro.admin._aboutus.repo.AboutUsRepo;
+import me.libme.apro.admin._aboutus.repo.AboutusDataAccess;
+import me.libme.apro.admin._aboutus.vo.AboutUsCriteria;
+import me.libme.apro.admin._aboutus.vo.AboutUsRecord;
 import me.libme.kernel._c._m.JPage;
 import me.libme.kernel._c._m.SimplePageRequest;
 import me.libme.webboot.Copy;
-
 import me.libme.webseed.web.ClosureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import me.libme.apro.admin._aboutus.model.AboutUs;
-import me.libme.apro.admin._aboutus.vo.AboutUsRecord;
-import me.libme.apro.admin._aboutus.vo.AboutUsCriteria;
-
-import me.libme.apro.admin._aboutus.repo.AboutUsRepo;
-import me.libme.apro.admin._aboutus.repo.AboutusDataAccess;
+import java.util.List;
 
 
 @Service
@@ -78,6 +76,20 @@ public class AboutusService  {
 	 */
 	public JPage<AboutUsRecord> getAboutUssByPage(AboutUsCriteria aboutUsCriteria, SimplePageRequest simplePageRequest) throws Exception{
 		return aboutusDataAccess.getAboutUssByPage(aboutUsCriteria,simplePageRequest);
+	}
+
+
+
+	/**
+	 * get
+	 */
+	public AboutUsRecord getAboutUs() throws Exception{
+		AboutUsRecord aboutUsRecord= null;
+		List list=aboutUsRepo.getAllModes(AboutUsRecord.class);
+		if(!list.isEmpty()){
+			aboutUsRecord= (AboutUsRecord) list.get(0);
+		}
+		return aboutUsRecord;
 	}
 
 }

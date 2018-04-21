@@ -1,22 +1,20 @@
 package me.libme.apro.admin._contactus.service;
 
 
+import me.libme.apro.admin._contactus.model.Contact;
+import me.libme.apro.admin._contactus.repo.ContactDataAccess;
+import me.libme.apro.admin._contactus.repo.ContactRepo;
+import me.libme.apro.admin._contactus.vo.ContactCriteria;
+import me.libme.apro.admin._contactus.vo.ContactRecord;
 import me.libme.kernel._c._m.JPage;
 import me.libme.kernel._c._m.SimplePageRequest;
 import me.libme.webboot.Copy;
-
 import me.libme.webseed.web.ClosureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import me.libme.apro.admin._contactus.model.Contact;
-import me.libme.apro.admin._contactus.vo.ContactRecord;
-import me.libme.apro.admin._contactus.vo.ContactCriteria;
-
-import me.libme.apro.admin._contactus.repo.ContactRepo;
-import me.libme.apro.admin._contactus.repo.ContactDataAccess;
+import java.util.List;
 
 
 @Service
@@ -78,6 +76,19 @@ public class ContactService  {
 	 */
 	public JPage<ContactRecord> getContactsByPage(ContactCriteria contactCriteria, SimplePageRequest simplePageRequest) throws Exception{
 		return contactDataAccess.getContactsByPage(contactCriteria,simplePageRequest);
+	}
+
+
+	/**
+	 * get
+	 */
+	public ContactRecord getContact () throws Exception{
+		ContactRecord contactRecord=null;
+		List<ContactRecord> list=contactRepo.getAllModes(ContactRecord.class);
+		if(!list.isEmpty()){
+			contactRecord=list.get(0);
+		}
+		return contactRecord;
 	}
 
 }
