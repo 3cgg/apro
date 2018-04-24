@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Created by J on 2018/3/31.
  */
-@Controller
+@Controller("PortalContactController")
 @RequestMapping("/portal/contact")
 @NoClosureException
 public class ContactController {

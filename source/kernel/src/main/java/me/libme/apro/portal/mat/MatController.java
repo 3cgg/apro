@@ -7,6 +7,7 @@ import me.libme.kernel._c._m.SimplePageRequest;
 import me.libme.webboot.ResponseModel;
 import me.libme.webseed.fn.mock.Mock;
 import me.libme.webseed.web.NoClosureException;
+import me.libme.webseed.web.SimplePageRequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +21,15 @@ import java.util.List;
 /**
  * Created by J on 2018/3/31.
  */
-@Controller
+@Controller("PortalMatController")
 @RequestMapping("/portal/mat")
 public class MatController {
 
     @Autowired
     private MatService matService;
+
+    @Autowired
+    private MatAccessService matAccessService;
 
     @NoClosureException
     @RequestMapping(value ="/list",method = RequestMethod.GET)
@@ -53,12 +57,9 @@ public class MatController {
     @RequestMapping(value ="/search",method = RequestMethod.GET)
     @ResponseBody
     @Mock(type =MatRecord[].class,pageable =true)
-    public ResponseModel search(MatCriteria matCriteria) throws Exception {
-
-
-
-
-        return ResponseModel.newSuccess(null);
+    public ResponseModel search(MatCriteria matCriteria, SimplePageRequestVO pageRequestVO) throws Exception {
+        JPage<MatRecord> matRecordJPage=matAccessService.search(matCriteria,new SimplePageRequest(pageRequestVO.getPageNumber(),pageRequestVO.getPageSize()));
+        return ResponseModel.newSuccess(matRecordJPage);
     }
 
     @NoClosureException
