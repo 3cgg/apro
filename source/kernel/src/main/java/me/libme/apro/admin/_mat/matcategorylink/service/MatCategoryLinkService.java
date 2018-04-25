@@ -46,12 +46,12 @@ public class MatCategoryLinkService  {
 
 
 	public JPage<MatCategoryLinkRecord> getBindMatCategory(String categoryId,MatCategoryLinkCriteria matCategoryLinkCriteria,
-														   SimplePageRequest simplePageRequest){
+														   SimplePageRequest simplePageRequest) throws Exception{
 		return  matCategoryLinkDataAccess.getBindMatCategory(categoryId, matCategoryLinkCriteria, simplePageRequest);
 	}
 
 	public JPage<MatCategoryLinkRecord> getUnbindMatCategory(String categoryId,MatCategoryLinkCriteria matCategoryLinkCriteria,
-															 SimplePageRequest simplePageRequest){
+															 SimplePageRequest simplePageRequest) throws Exception{
 		return  matCategoryLinkDataAccess.getUnbindMatCategory(categoryId, matCategoryLinkCriteria, simplePageRequest);
 
 	}

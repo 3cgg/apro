@@ -36,17 +36,17 @@ public class MatDataAccess extends DataAccessSupport {
      */
     JPage<MatRecord> getMatRecordsByPage(MatCriteria matCriteria, SimplePageRequest simplePageRequest){
 
-        String sql="select DISTINCT \n" +
-                "\n" +
-                "a.id as id ,\n" +
-                "a.`name` as name,\n" +
-                "a.size as size,\n" +
-                "a._code as code,\n" +
-                "a._desc as description \n" +
-                "\n" +
-                "from t_mat  a\n" +
-                "left join t_mat_category_link b on a.id=b.mat_id\n" +
-                "left join t_mat_category c on b.category_id=c.id\n" +
+        String sql="select " +
+                " " +
+                "a.id as id , " +
+                "a.`name` as name, " +
+                "a.size as size, " +
+                "a._code as code, " +
+                "a._desc as description  " +
+                " " +
+                "from t_mat  a " +
+                "left join t_mat_category_link b on a.id=b.mat_id " +
+                "left join t_mat_category c on b.category_id=c.id " +
                 "where 1=1 ";
 
         Map<String, JCondition.Condition> params=new HashMap<>();
@@ -64,7 +64,7 @@ public class MatDataAccess extends DataAccessSupport {
         }
 
         String name=matCriteria.getName();
-        if(JStringUtils.isNotNullOrEmpty(categoryId)){
+        if(JStringUtils.isNotNullOrEmpty(name)){
             params.put("name", JCondition.Condition.likes(name));
             sql =sql+" and  a.`name` like :name ";
         }
