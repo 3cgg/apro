@@ -26,18 +26,18 @@ public class MatCategoryLinkController  {
 
 	@ResponseBody
 	@RequestMapping(path="/getBindMatCategory",method=RequestMethod.GET)
-	public ResponseModel  getBindMatCategory(String matId, MatCategoryLinkCriteria matCategoryLinkCriteria,
+	public ResponseModel  getBindMatCategory(String categoryId, MatCategoryLinkCriteria matCategoryLinkCriteria,
 											 SimplePageRequestVO simplePageRequestVO) throws Exception{
-		JPage<MatCategoryLinkRecord> page=matCategoryLinkService.getBindMatCategory(matId, matCategoryLinkCriteria,
+		JPage<MatCategoryLinkRecord> page=matCategoryLinkService.getBindMatCategory(categoryId, matCategoryLinkCriteria,
 				new SimplePageRequest(simplePageRequestVO.getPageNumber(),simplePageRequestVO.getPageSize()));
 		return ResponseModel.newSuccess(page);
 	}
 
 	@ResponseBody
 	@RequestMapping(path="/getUnbindMatCategory",method=RequestMethod.GET)
-	public ResponseModel  getUnbindMatCategory(String matId, MatCategoryLinkCriteria matCategoryLinkCriteria,
+	public ResponseModel  getUnbindMatCategory(String categoryId, MatCategoryLinkCriteria matCategoryLinkCriteria,
 											 SimplePageRequestVO simplePageRequestVO) throws Exception{
-		JPage<MatCategoryLinkRecord> page=matCategoryLinkService.getUnbindMatCategory(matId, matCategoryLinkCriteria,
+		JPage<MatCategoryLinkRecord> page=matCategoryLinkService.getUnbindMatCategory(categoryId, matCategoryLinkCriteria,
 				new SimplePageRequest(simplePageRequestVO.getPageNumber(),simplePageRequestVO.getPageSize()));
 		return ResponseModel.newSuccess(page);
 	}
