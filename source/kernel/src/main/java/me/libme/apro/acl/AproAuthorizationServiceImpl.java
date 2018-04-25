@@ -15,9 +15,18 @@ public class AproAuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public boolean authorise(SessionUser sessionUser, HttpInfo httpInfo) {
-
         if(httpInfo.url().indexOf("/portal/")==-1){
-            return false;
+
+            if(httpInfo.url().indexOf("/codetablemanager/")!=-1
+                    ||httpInfo.url().indexOf("/menumanager/")!=-1){
+                return true;
+            }
+
+            if(SessionUser.DEFUALT==sessionUser){ //admin module is only be access after authorized
+                return false;
+            }else {
+                return true;
+            }
         }
         return true;
     }
