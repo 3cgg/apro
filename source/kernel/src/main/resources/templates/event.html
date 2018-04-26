@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="~{head::copy(~{::title},_,~{::style},_,_)}" >
     <title>吴江市文教牛津布厂</title>
     <meta name=”description” content="吴江市文教牛津布厂 牛津布厂"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +43,7 @@
 </head>
 <body>
 
+<div th:replace="~{navbar::copy}">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -65,7 +66,7 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
+</div>
 
 <!--<div id="myCarousel" class="carousel " data-ride="carousel">-->
     <!--&lt;!&ndash; Indicators &ndash;&gt;-->
@@ -110,11 +111,19 @@
         <div class="col-lg-9 c-event">
 
 
-            <ul class="list-group " style="margin-left: 30px">
+            <ul class="list-group " style="margin-left: 30px" th:remove="all-but-first">
+
+                <li class="list-group-item-text list-group-item-padding c-event-li"  th:each="event : ${events}" >
+                    <a class="" th:href="@{/portal/event/detail(id=${event.id})}"  href="event-detail.html" th:text="${event.title}">——写在参观采访吴江市文教牛津布厂之后</a>
+                    <span th:text="${event.publishTime}">2018-04-02</span>
+                </li>
+
                 <li class="list-group-item-text list-group-item-padding c-event-li">
                     <a class="" href="event-detail.html">——写在参观采访吴江市文教牛津布厂之后</a>
                     <span>2018-04-02</span>
                 </li>
+
+
                 <li class="list-group-item-text list-group-item-padding c-event-li">
                     <a class="" href="#">高需求、高质量、高色牢度</a>
                     <span>2018-04-02</span>
@@ -188,12 +197,14 @@
 
 
 
-<footer class="footer">
-    <div class="container">
-        <p class="text-muted">CopyRight © 2006-2010 吴江市文教牛津布厂</p>
-        <p class="text-muted">联系电话：0512-63360065  13812691192  13405281040   传真：0512-63369849  地址：吴江市民营开发区八坼镇南刘路</p>
-    </div>
-</footer>
+<div th:replace="~{footer :: copy}">
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">CopyRight © 2006-2010 吴江市文教牛津布厂</p>
+            <p class="text-muted">联系电话：0512-63360065  13812691192  13405281040   传真：0512-63369849  地址：吴江市民营开发区八坼镇南刘路</p>
+        </div>
+    </footer>
+</div>
 
 </body>
 
