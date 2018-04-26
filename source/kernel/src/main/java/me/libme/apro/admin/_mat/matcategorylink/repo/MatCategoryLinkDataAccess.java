@@ -56,7 +56,7 @@ public class MatCategoryLinkDataAccess extends DataAccessSupport {
                 "a.`name` as name, " +
                 "a.size as size, " +
                 "a._code as code, " +
-                "a._desc as description , " +
+                "a._desc as description  " +
                 "from t_mat  a  " +
                 "left join t_mat_category_link b on a.id=b.mat_id " +
                 "where a.deleted='N' and b.category_id = :categoryId";

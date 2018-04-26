@@ -46,14 +46,14 @@ public class MatCategoryLinkController  {
 	@ResponseBody
 	@RequestMapping(path="/bindMatCategory",method=RequestMethod.POST)
 	public ResponseModel  bindMatCategory(MatCategoryLinkRecord matCategoryLinkRecord) throws Exception{
-		matCategoryLinkService.bindMatCategory(matCategoryLinkRecord.getImgId(),matCategoryLinkRecord.getCategoryId());
+		matCategoryLinkService.bindMatCategory(matCategoryLinkRecord.getId(),matCategoryLinkRecord.getCategoryId());
 		return ResponseModel.newSuccess();
 	}
 
 	@ResponseBody
 	@RequestMapping(path="/unbindMatCategory",method=RequestMethod.POST)
 	public ResponseModel  unbindMatCategory(MatCategoryLinkRecord matCategoryLinkRecord) throws Exception{
-		matCategoryLinkService.unbindMatCategory(matCategoryLinkRecord.getImgId(),matCategoryLinkRecord.getCategoryId());
+		matCategoryLinkService.unbindMatCategory(matCategoryLinkRecord.getId(),matCategoryLinkRecord.getCategoryId());
 		return ResponseModel.newSuccess();
 	}
 	
