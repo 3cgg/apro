@@ -63,6 +63,13 @@ public class MatDataAccess extends DataAccessSupport {
             sql =sql+" and c.`id` = :categoryId ";
         }
 
+
+        String categoryIds=matCriteria.getCategoryIds();
+        if(JStringUtils.isNotNullOrEmpty(categoryId)){
+            params.put("categoryIds", JCondition.Condition.equal(categoryIds));
+            sql =sql+" and c.`id` in ( :categoryIds )";
+        }
+
         String name=matCriteria.getName();
         if(JStringUtils.isNotNullOrEmpty(name)){
             params.put("name", JCondition.Condition.likes(name));

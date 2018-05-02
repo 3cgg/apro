@@ -1,9 +1,12 @@
 package me.libme.apro.portal.mat;
 
 import me.libme.apro.admin._mat.mat.service.MatService;
+import me.libme.apro.admin._mat.matcategory.service.MatCategoryService;
+import me.libme.apro.admin._mat.matcategory.vo.MatCategoryRecord;
+import me.libme.apro.admin._mat.matcategorylink.vo.MatCategoryLinkRecord;
 import me.libme.kernel._c._m.JPage;
-import me.libme.kernel._c._m.JPageUtil;
 import me.libme.kernel._c._m.SimplePageRequest;
+import me.libme.kernel._c.util.JStringUtils;
 import me.libme.webboot.ResponseModel;
 import me.libme.webseed.fn.mock.Mock;
 import me.libme.webseed.web.NoClosureException;
@@ -13,10 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by J on 2018/3/31.
@@ -29,17 +35,47 @@ public class MatController {
     private MatService matService;
 
     @Autowired
+    private MatCategoryService matCategoryService;
+
+
+    @Autowired
     private MatAccessService matAccessService;
+
 
     @NoClosureException
     @RequestMapping(value ="/list",method = RequestMethod.GET)
-    public String list(Model model) throws Exception{
-        me.libme.apro.admin._mat.mat.vo.MatCriteria matCriteria=new me.libme.apro.admin._mat.mat.vo.MatCriteria ();
-        JPage<me.libme.apro.admin._mat.mat.vo.MatRecord> page= matService.getMatsByPage(matCriteria,new SimplePageRequest(0,6));
-        List<MatRecord> matRecords=new ArrayList<>(page.getContent().size());
-        page.getContent().forEach(mat->matRecords.add(toPortal(mat)));
-        JPageUtil.replaceConent(page,matRecords);
-        model.addAttribute("page",page);
+    public String list(Model model, @RequestParam(name="tag",required = false) String tag) throws Exception{
+
+        MatCriteria matCriteria=new MatCriteria();
+        List<String> categoryIds=new ArrayList<>();
+        Map<String,List<MatCategoryRecord>> categorys=new HashMap<>();
+
+        if(JStringUtils.isNotNullOrEmpty(tag)) {
+            List<MatCategoryRecord> matCategoryRecords = matCategoryService.getMatCategoryByGroup(tag);
+            matCategoryRecords.forEach(matCategoryRecord -> categoryIds.add(matCategoryRecord.getId()));
+            matCriteria.setCategoryIds(String.join(",", categoryIds));
+            categorys.put(tag,matCategoryRecords);
+        }else{
+            List<MatCategoryRecord> matCategoryRecords = matCategoryService.getMatCategoryByGroup(null);
+            matCategoryRecords.forEach(matCategoryRecord -> {  // group by category group
+                String group=matCategoryRecord.getGroup();
+                if(categorys.containsKey(group)){
+                    categorys.get(group).add(matCategoryRecord);
+                }else {
+                    List<MatCategoryRecord> mcs=new ArrayList<>();
+                    mcs.add(matCategoryRecord);
+                    categorys.put(matCategoryRecord.getGroup(),mcs);
+                }
+                categoryIds.add(matCategoryRecord.getId());
+            });
+            matCriteria.setCategoryIds(String.join(",", categoryIds));
+
+        }
+
+        JPage<MatRecord> matRecordJPage=matAccessService.search(matCriteria,new SimplePageRequest(0,10));
+        model.addAttribute("page",matRecordJPage);
+        model.addAttribute("categorys",categorys);
+
         return "/mat";
     }
 

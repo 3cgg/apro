@@ -24,6 +24,17 @@ public class MatCategory extends JBaseModel {
     @Column(name = "_desc")
     private String description;
 
+    @Column(name = "_group")
+    private String group;
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
     public String getName() {
         return name;
     }

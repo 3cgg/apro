@@ -12,6 +12,15 @@ public class MatCriteria {
 
     private String name;
 
+    private String categoryIds;
+
+    public String getCategoryIds() {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(String categoryIds) {
+        this.categoryIds = categoryIds;
+    }
 
     public String getCategoryId() {
         return categoryId;
