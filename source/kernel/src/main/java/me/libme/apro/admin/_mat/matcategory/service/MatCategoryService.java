@@ -60,6 +60,7 @@ public class MatCategoryService  {
         dbMatCategory.setName(matCategoryRecord.getName());
         dbMatCategory.setCode(matCategoryRecord.getCode());
         dbMatCategory.setDescription(matCategoryRecord.getDescription());
+        dbMatCategory.setGroup(matCategoryRecord.getGroup());
         matCategoryRepo.updateOnly(dbMatCategory);
 	}
 
@@ -85,7 +86,9 @@ public class MatCategoryService  {
 	 * page...
 	 */
 	public JPage<MatCategoryRecord> getMatCategorysByPage(MatCategoryCriteria matCategoryCriteria, SimplePageRequest simplePageRequest) throws Exception{
-		return matCategoryDataAccess.getMatCategorysByPage(matCategoryCriteria,simplePageRequest);
+		JPage<MatCategoryRecord> matCategoryRecordJPage= matCategoryDataAccess.getMatCategorysByPage(matCategoryCriteria,simplePageRequest);
+		appendInfo(matCategoryRecordJPage.getContent().toArray(new MatCategoryRecord[]{}));
+		return matCategoryRecordJPage;
 	}
 
 

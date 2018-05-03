@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"   xmlns:th="http://www.thymeleaf.org" >
+<head  th:replace="~{head::copy(~{::title},_,~{::style},_,_)}" >
     <title>吴江市文教牛津布厂</title>
     <meta name=”description” content="吴江市文教牛津布厂 牛津布厂"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +42,7 @@
 <body>
 
 <div class="c-content">
-
+    <div th:replace="~{navbar::copy}">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -65,7 +65,7 @@
             </div><!--/.nav-collapse -->
         </div>
     </nav>
-
+    </div>
     <!--<div class="container">-->
 
         <!--<ol class="breadcrumb">-->
@@ -93,15 +93,20 @@
                 </div>
 
                 <div class="row" style="padding: 0 15px;">
-                    <div class="c-sr-category " >
+                    <div class="c-sr-category " th:each="entry: ${categorys}" >
 
 
                         <div class="c-sr-category-label ">
-                            <strong>布料分类：</strong>
+                            <strong th:text="${entry.key}">布料分类：</strong>
                         </div>
                         <div class="c-sr-category-list ">
-                            <ul>
-                                <li><a href="">1680D系列加捻、提花...</a></li>
+                            <ul th:remove="all-but-first">
+                                <li th:each="category : ${entry.value}">
+                                    <a href="" th:text="${category.name}"
+                                        th:attr="data-code=${category.code}"
+                                       th:alt-title="${category.code}"
+
+                                    >1680D系列加捻、提花...</a></li>
                                 <li><a href="">色织格子箱包布</a></li>
                                 <li><a href="">多色彩条帐篷布</a></li>
                                 <li><a href="">涤纶弹丝系列</a></li>
@@ -123,15 +128,21 @@
     </div>
 
     <div class="container">
-        <div class="marketing c-mat-group">
+        <div class="marketing c-mat-group" th:remove="all-but-first" >
 
             <!-- Three columns of text below the carousel -->
-            <div class="row">
-                <div class="col-lg-4 col-md-4 c-mat-group-list">
-                    <a href="mat-detail.html"><img src="apro/img/blue.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-                    <h2>蓝色布料</h2>
-                    <p>品名：F420菱形格-2</p>
-                    <p>规格：420D*420D</p>
+            <div class="row" th:remove="all-but-first">
+                <div class="col-lg-4 col-md-4 c-mat-group-list"
+                    th:each="mat : ${page.content}"
+                >
+                    <a href="mat-detail.html"
+                       th:href="@{/portal/mat/detail/${mat.id}}"
+                    ><img src="apro/img/blue.jpg"
+                          th:src="${mat.imgFile.uri}"
+                          alt="Generic placeholder image" width="140" height="140"></a>
+                    <h2 th:text="${mat.name}">蓝色布料</h2>
+                    <p th:text="${mat.code}">品名：F420菱形格-2</p>
+                    <p th:text="${mat.size}">规格：420D*420D</p>
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4 col-md-4 c-mat-group-list">
                     <a href="mat-detail.html"><img class="" src="apro/img/green.jpg" alt="Generic placeholder image" width="140" height="140"></a>
@@ -145,8 +156,8 @@
                     <p>品名：F420菱形格-2</p>
                     <p>规格：420D*420D</p>
                 </div><!-- /.col-lg-4 -->
-            </div><!-- /.row -->
-            <div class="row">
+            <!--</div>&lt;!&ndash; /.row &ndash;&gt;-->
+            <!--<div class="row">-->
                 <div class="col-lg-4 col-md-4 c-mat-group-list">
                     <a href="mat-detail.html"><img class="" src="apro/img/blue.jpg" alt="Generic placeholder image" width="140" height="140"></a>
                     <h2>蓝色布料</h2>
@@ -210,12 +221,16 @@
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="text-muted">CopyRight © 2006-2010 吴江市文教牛津布厂</p>
-        <p class="text-muted">联系电话：0512-63360065  13812691192  13405281040   传真：0512-63369849  地址：吴江市民营开发区八坼镇南刘路</p>
-    </div>
-</footer>
+
+
+<div th:replace="~{footer :: copy}">
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">CopyRight © 2006-2010 吴江市文教牛津布厂</p>
+            <p class="text-muted">联系电话：0512-63360065  13812691192  13405281040   传真：0512-63369849  地址：吴江市民营开发区八坼镇南刘路</p>
+        </div>
+    </footer>
+</div>
 
 
 </body>

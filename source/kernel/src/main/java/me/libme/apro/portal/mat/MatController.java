@@ -1,5 +1,6 @@
 package me.libme.apro.portal.mat;
 
+import me.libme.apro.AproCodesTable;
 import me.libme.apro.admin._mat.mat.service.MatService;
 import me.libme.apro.admin._mat.mat.vo.MatRecord;
 import me.libme.apro.admin._mat.matcategory.service.MatCategoryService;
@@ -8,6 +9,7 @@ import me.libme.kernel._c._m.JPage;
 import me.libme.kernel._c._m.SimplePageRequest;
 import me.libme.kernel._c.util.JStringUtils;
 import me.libme.webboot.ResponseModel;
+import me.libme.webseed.fn.kv.CodeDictService;
 import me.libme.webseed.fn.mock.Mock;
 import me.libme.webseed.web.NoClosureException;
 import me.libme.webseed.web.SimplePageRequestVO;
@@ -39,6 +41,9 @@ public class MatController {
     @Autowired
     private MatAccessService matAccessService;
 
+    @Autowired
+    private CodeDictService codeDictService;
+
 
     @NoClosureException
     @RequestMapping(value ="/list",method = RequestMethod.GET)
@@ -46,7 +51,8 @@ public class MatController {
 
         String tagName=tag;
 
-        if(tag.startsWith("http://")){
+        if(JStringUtils.isNotNullOrEmpty(tag)
+                    &&tag.startsWith("http://")){
             URI uri=new URI(tag);
             String query=uri.toURL().getQuery();
             tagName=query.split("=")[1].trim();
@@ -60,18 +66,23 @@ public class MatController {
             List<MatCategoryRecord> matCategoryRecords = matCategoryService.getMatCategoryByGroup(tagName);
             matCategoryRecords.forEach(matCategoryRecord -> categoryIds.add(matCategoryRecord.getId()));
             matCriteria.setCategoryIds(String.join(",", categoryIds));
-            categorys.put(tagName,matCategoryRecords);
+            categorys.put(
+                    codeDictService.val(tagName, AproCodesTable.MatCatGroup.CODE)
+                    ,matCategoryRecords);
         }else{
             List<MatCategoryRecord> matCategoryRecords = matCategoryService.getMatCategoryByGroup(null);
+            List<MatCategoryRecord> mcs=new ArrayList<>();
+            categorys.put("布料分类",mcs);
             matCategoryRecords.forEach(matCategoryRecord -> {  // group by category group
-                String group=matCategoryRecord.getGroup();
-                if(categorys.containsKey(group)){
-                    categorys.get(group).add(matCategoryRecord);
-                }else {
-                    List<MatCategoryRecord> mcs=new ArrayList<>();
-                    mcs.add(matCategoryRecord);
-                    categorys.put(matCategoryRecord.getGroup(),mcs);
-                }
+//                String group=matCategoryRecord.getGroup();
+//                if(categorys.containsKey(group)){
+//                    categorys.get(group).add(matCategoryRecord);
+//                }else {
+//                    List<MatCategoryRecord> mcs=new ArrayList<>();
+//                    mcs.add(matCategoryRecord);
+//                    categorys.put(matCategoryRecord.getGroup(),mcs);
+//                }
+                mcs.add(matCategoryRecord);
                 categoryIds.add(matCategoryRecord.getId());
             });
             matCriteria.setCategoryIds(String.join(",", categoryIds));

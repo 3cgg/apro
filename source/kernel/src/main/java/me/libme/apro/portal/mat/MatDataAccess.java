@@ -8,6 +8,8 @@ import me.libme.module.spring.jpahibernate.query2.JCondition;
 import me.libme.webboot.fn.jpa.DataAccessSupport;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,18 +39,18 @@ public class MatDataAccess extends DataAccessSupport {
      */
     JPage<MatRecord> getMatRecordsByPage(MatCriteria matCriteria, SimplePageRequest simplePageRequest){
 
-        String sql="select " +
+        String sql="select DISTINCT  " +
                 " " +
                 "a.id as id , " +
                 "a.`name` as name, " +
                 "a.size as size, " +
                 "a._code as code, " +
                 "a._desc as description  " +
-                " " +
+                " ,a.img_id as imgId " +
                 "from t_mat  a " +
                 "left join t_mat_category_link b on a.id=b.mat_id " +
                 "left join t_mat_category c on b.category_id=c.id " +
-                "where 1=1 ";
+                "where a.deleted='N'  ";
 
         Map<String, JCondition.Condition> params=new HashMap<>();
 
@@ -66,8 +68,10 @@ public class MatDataAccess extends DataAccessSupport {
 
 
         String categoryIds=matCriteria.getCategoryIds();
-        if(JStringUtils.isNotNullOrEmpty(categoryId)){
-            params.put("categoryIds", JCondition.Condition.equal(categoryIds));
+        if(JStringUtils.isNotNullOrEmpty(categoryIds)){
+            ArrayList<String> vals=new ArrayList<>();
+            Arrays.asList(categoryIds.split(",")).forEach(k->vals.add(k));
+            params.put("categoryIds", JCondition.Condition.in(vals));
             sql =sql+" and c.`id` in ( :categoryIds )";
         }
 
@@ -76,6 +80,12 @@ public class MatDataAccess extends DataAccessSupport {
             params.put("name", JCondition.Condition.likes(name));
             sql =sql+" and  a.`name` like :name ";
         }
+
+//        Map<String,Object> paramObject=params(params);
+//        List<String> vals=new ArrayList<>();
+//        Arrays.asList(categoryIds.split(",")).forEach(k->vals.add(k));
+//        paramObject.put("categoryIds",vals);
+
 
         return nativeQuery().setSql(sql).setParams(params(params))
                 .modelPage(simplePageRequest,MatRecord.class);

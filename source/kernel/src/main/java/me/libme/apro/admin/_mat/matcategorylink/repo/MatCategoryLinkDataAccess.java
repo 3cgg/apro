@@ -121,7 +121,6 @@ public class MatCategoryLinkDataAccess extends DataAccessSupport {
                 "a._desc as description  " +
                 " " +
                 "from t_mat  a  " +
-                "left join t_mat_category_link b on a.id=b.mat_id " +
                 "where a.deleted='N' and a.id not in ( " +
 
                 "select  " +
