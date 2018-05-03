@@ -93,22 +93,29 @@
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators" th:remove="all-but-first">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"
-            th:each="banner,bannerStat:${banners}" data-slide-to="${bannerStat.count}"
+        <li data-target="#myCarousel"
+
+            th:each="banner,bannerStat:${banners}"
+            th:attr="data-slide-to=${bannerStat.count}"
+            th:class="${bannerStat.count==1} ? 'active' "
+            class="active"
         ></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner" role="listbox" th:remove="all-but-first" >
         <div class="item active"
+             th:class="${bannerStat.count==1} ? 'item active' :'item' "
              th:each="banner,bannerStat:${banners}" >
-            <img class="first-slide" th:src="@{/${banner.adImg}}" src="apro/img/banner1.jpg" alt="First slide">
+            <img th:src="${banner.adImgFile.uri}"
+                 th:class="${bannerStat.count==1} ? 'first-slide' : (${bannerStat.count==2} ? 'second-slide':(${bannerStat.count==3} ? 'third-slide') ) "
+                 src="apro/img/banner1.jpg" alt="First slide">
         </div>
         <div class="item">
-            <img class="second-slide" th:src="@{/apro/img/banner2.jpg}" src="apro/img/banner2.jpg" alt="Second slide">
+            <img class="second-slide" src="apro/img/banner2.jpg" alt="Second slide">
         </div>
         <div class="item">
-            <img class="third-slide" th:src="@{/apro/img/banner3.jpg}" src="apro/img/banner3.jpg" alt="Third slide">
+            <img class="third-slide"  src="apro/img/banner3.jpg" alt="Third slide">
         </div>
     </div>
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -127,22 +134,20 @@
     <!-- Three columns of text below the carousel -->
     <div class="row" th:remove="all-but-first">
 
-        <div class="col-lg-4" th:each="recMat : ${recMats}">
-            <a th:href="@{/portal/mat/detail(id=${recMat.id})}">
-                <img class="img-circle" th:src="@{/apro/img/blue.jpg}" src="apro/img/blue.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-            <h2>蓝色布料</h2>
-            <p>品名：F420菱形格-2</p>
-            <p>规格：420D*420D</p>
+        <div class="col-md-4 col-sm-4" th:each="recMat : ${recMats}">
+            <a th:href="@{/portal/mat/list(tag=${recMat.link})}">
+                <img class="img-circle" th:src="${recMat.adImgFile.uri}" src="apro/img/blue.jpg" alt="Generic placeholder image" width="140" height="140"></a>
+            <h2 th:text="${recMat.title}" >蓝色布料</h2>
         </div><!-- /.col-lg-4 -->
 
 
-        <div class="col-lg-4">
+        <div class="col-md-4 col-sm-4">
             <a href="mat-detail.html"><img class="img-circle" th:src="@{/apro/img/blue.jpg}" src="apro/img/blue.jpg" alt="Generic placeholder image" width="140" height="140"></a>
             <h2>蓝色布料</h2>
             <p>品名：F420菱形格-2</p>
             <p>规格：420D*420D</p>
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
+        <div class="col-md-4 col-sm-4">
             <a href="mat-detail.html"><img class="img-circle" th:src="@{/apro/img/green.jpg}" src="apro/img/green.jpg" alt="Generic placeholder image" width="140" height="140"></a>
             <h2>绿色布料</h2>
             <p>品名：F420菱形格-2</p>

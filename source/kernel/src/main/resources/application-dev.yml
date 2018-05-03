@@ -64,7 +64,7 @@ cpp :
     name : webseed
     security-key : _you_@never@_known@aha_3cgg@163.com_
     auth.authentication : true
-    auth.authorization : true
+    auth.authorization : false
     jwt :
          secret : jiazhongjin
          expiration : 3600000000 #milliseconds  ; long long time , only for developing

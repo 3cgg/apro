@@ -18,7 +18,9 @@ public class AproAuthorizationServiceImpl implements AuthorizationService {
         if(httpInfo.url().indexOf("/portal/")==-1){
 
             if(httpInfo.url().indexOf("/codetablemanager/")!=-1
-                    ||httpInfo.url().indexOf("/menumanager/")!=-1){
+                    ||httpInfo.url().indexOf("/menumanager/")!=-1
+                    ||httpInfo.url().indexOf("swagger")!=-1
+                    ||httpInfo.url().indexOf("/v2/")!=-1){
                 return true;
             }
 

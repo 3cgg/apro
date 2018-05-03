@@ -1,6 +1,7 @@
 package me.libme.apro.admin._mat.matcategory.service;
 
 
+import me.libme.apro.AproCodesTable;
 import me.libme.apro.admin._mat.matcategory.model.MatCategory;
 import me.libme.apro.admin._mat.matcategory.repo.MatCategoryDataAccess;
 import me.libme.apro.admin._mat.matcategory.repo.MatCategoryRepo;
@@ -11,6 +12,7 @@ import me.libme.kernel._c._m.SimplePageRequest;
 import me.libme.kernel._c.util.JStringUtils;
 import me.libme.module.spring.jpahibernate.query2.JCondition;
 import me.libme.webboot.Copy;
+import me.libme.webseed.fn.kv.CodeDictService;
 import me.libme.webseed.web.ClosureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,9 @@ public class MatCategoryService  {
 
 	@Autowired
 	private MatCategoryDataAccess matCategoryDataAccess;
+
+	@Autowired
+	private CodeDictService codeDictService;
 
 
     private MatCategory toMatCategory(MatCategoryRecord matCategoryRecord){
@@ -70,7 +75,9 @@ public class MatCategoryService  {
 	 * get
 	 */
 	public MatCategoryRecord getMatCategoryById (String id) throws Exception{
-		return matCategoryRepo.active(id,MatCategoryRecord.class);
+		MatCategoryRecord matCategoryRecord= matCategoryRepo.active(id,MatCategoryRecord.class);
+		appendInfo(matCategoryRecord);
+		return matCategoryRecord;
 	}
 
 	
@@ -82,7 +89,7 @@ public class MatCategoryService  {
 	}
 
 
-	public List<MatCategoryRecord> getMatCategoryByGroup(String group){
+	public List<MatCategoryRecord> getMatCategoryByGroup(String group) throws Exception{
 		JCondition condition = matCategoryRepo.singleEntityQuery2()
 				.conditionDefault();
 
@@ -90,12 +97,20 @@ public class MatCategoryService  {
 			condition.equals("group", group);
 		}
 
-		return condition.ready()
+		List<MatCategoryRecord> matCategoryRecords= condition.ready()
 				.order().asc("group")
 				.ready()
 				.models(MatCategoryRecord.class);
+		appendInfo(matCategoryRecords.toArray(new MatCategoryRecord[]{}));
+		return matCategoryRecords;
 	}
 
+
+	private void appendInfo(MatCategoryRecord... matCategoryRecords){
+		for(MatCategoryRecord matCategoryRecord:matCategoryRecords){
+			matCategoryRecord.setGroupName(codeDictService.val(matCategoryRecord.getGroup(), AproCodesTable.MatCatGroup.CODE));
+		}
+	}
 
 
 

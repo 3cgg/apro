@@ -9,17 +9,12 @@ public interface Cons {
 
     interface CMS{
 
-        String IDNEX_IMG_GROUP="IDNEX_IMG_GROUP";
+        String INDEX_IMG_GROUP="INDEX_IMG_GROUP";
 
-        String IDNEX_BANNER="IDNEX_BANNER";
+        String INDEX_BANNER="INDEX_BANNER";
 
+        String EVENT="EVENT";
     }
-
-
-    String MAT_CATEGORY_GROUP="MAT_CATEGORY_GROUP";
-
-
-
 
 
 

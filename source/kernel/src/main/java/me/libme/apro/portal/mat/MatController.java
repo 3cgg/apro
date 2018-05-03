@@ -1,9 +1,9 @@
 package me.libme.apro.portal.mat;
 
 import me.libme.apro.admin._mat.mat.service.MatService;
+import me.libme.apro.admin._mat.mat.vo.MatRecord;
 import me.libme.apro.admin._mat.matcategory.service.MatCategoryService;
 import me.libme.apro.admin._mat.matcategory.vo.MatCategoryRecord;
-import me.libme.apro.admin._mat.matcategorylink.vo.MatCategoryLinkRecord;
 import me.libme.kernel._c._m.JPage;
 import me.libme.kernel._c._m.SimplePageRequest;
 import me.libme.kernel._c.util.JStringUtils;
@@ -14,11 +14,9 @@ import me.libme.webseed.web.SimplePageRequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,15 +44,23 @@ public class MatController {
     @RequestMapping(value ="/list",method = RequestMethod.GET)
     public String list(Model model, @RequestParam(name="tag",required = false) String tag) throws Exception{
 
+        String tagName=tag;
+
+        if(tag.startsWith("http://")){
+            URI uri=new URI(tag);
+            String query=uri.toURL().getQuery();
+            tagName=query.split("=")[1].trim();
+        }
+
         MatCriteria matCriteria=new MatCriteria();
         List<String> categoryIds=new ArrayList<>();
         Map<String,List<MatCategoryRecord>> categorys=new HashMap<>();
 
-        if(JStringUtils.isNotNullOrEmpty(tag)) {
-            List<MatCategoryRecord> matCategoryRecords = matCategoryService.getMatCategoryByGroup(tag);
+        if(JStringUtils.isNotNullOrEmpty(tagName)) {
+            List<MatCategoryRecord> matCategoryRecords = matCategoryService.getMatCategoryByGroup(tagName);
             matCategoryRecords.forEach(matCategoryRecord -> categoryIds.add(matCategoryRecord.getId()));
             matCriteria.setCategoryIds(String.join(",", categoryIds));
-            categorys.put(tag,matCategoryRecords);
+            categorys.put(tagName,matCategoryRecords);
         }else{
             List<MatCategoryRecord> matCategoryRecords = matCategoryService.getMatCategoryByGroup(null);
             matCategoryRecords.forEach(matCategoryRecord -> {  // group by category group
@@ -79,15 +85,15 @@ public class MatController {
         return "/mat";
     }
 
-    private MatRecord toPortal(me.libme.apro.admin._mat.mat.vo.MatRecord matRecord){
-        MatRecord mat=new MatRecord();
-        mat.setName(matRecord.getName());
-        mat.setCode(matRecord.getCode());
-        mat.setSize(matRecord.getSize());
-        mat.setImgId(matRecord.getImgId());
-        mat.setDescription(matRecord.getDescription());
-        return mat;
-    }
+//    private MatRecord toPortal(me.libme.apro.admin._mat.mat.vo.MatRecord matRecord){
+//        MatRecord mat=new MatRecord();
+//        mat.setName(matRecord.getName());
+//        mat.setCode(matRecord.getCode());
+//        mat.setSize(matRecord.getSize());
+//        mat.setImgId(matRecord.getImgId());
+//        mat.setDescription(matRecord.getDescription());
+//        return mat;
+//    }
 
 
     @RequestMapping(value ="/search",method = RequestMethod.GET)
@@ -99,17 +105,13 @@ public class MatController {
     }
 
     @NoClosureException
-    @RequestMapping(value ="/detail", method = RequestMethod.GET)
-    public String detail(Model model){
+    @RequestMapping(value ="/detail/{matId}", method = RequestMethod.GET)
+    public String detail(Model model,@PathVariable(name="matId") String id) throws Exception {
+
+        me.libme.apro.admin._mat.mat.vo.MatRecord matRecord= matService.getMatById(id);
+        model.addAttribute("matRecord",matRecord);
+
         return "/mat-detail";
-    }
-
-
-    @NoClosureException
-    @RequestMapping(value = "/hello",method = RequestMethod.GET)
-    public String hello(Model model) {
-        model.addAttribute("name", "Dear");
-        return "hello";
     }
 
 

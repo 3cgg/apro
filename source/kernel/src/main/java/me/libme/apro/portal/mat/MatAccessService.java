@@ -1,5 +1,6 @@
 package me.libme.apro.portal.mat;
 
+import me.libme.apro.admin._mat.mat.vo.MatRecord;
 import me.libme.kernel._c._m.JPage;
 import me.libme.kernel._c._m.SimplePageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
