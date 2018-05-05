@@ -84,9 +84,9 @@
                 <div class="row">
                     <div class="col-lg-6 c-sr-search-tgroup">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="输入你要查询的名称">
+                            <input id="keyword" type="text" class="form-control" placeholder="输入你要查询的名称">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">查询</button>
+                                <button id="searchBtn" class="btn btn-default" type="button">查询</button>
                             </span>
                         </div><!-- /input-group -->
                     </div><!-- /.col-lg-6 -->
@@ -185,19 +185,24 @@
                 <div class="col-lg-4 col-md-4" style="float: inherit !important; margin: auto">
 
                     <nav aria-label="Page navigation" style="text-align: center">
-                        <ul class="pagination">
+                        <ul id="pagination" class="pagination" th:attr="data-total-page-number=${page.totalPageNumber}">
                             <li>
-                                <a href="#" aria-label="Previous">
+                                <a id="previous" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                            <li th:each="i,stat:${#numbers.sequence(0, page.totalPageNumber)}" th:attr="data-page-number=${i}"  >
+                                <a name="current" href="javascript:void(0)" th:text="${i+1}" th:attr="data-page-number=${i}"
+                                   th:if="${i<2}" >1</a>
+                                <a id="more" href="javascript:void(0)" class="active"
+                                   th:if="${i==2}" >...</a>
+                            </li>
+                            <!--<li><a href="#">2</a></li>-->
+                            <!--<li><a href="#">3</a></li>-->
+                            <!--<li><a href="#">4</a></li>-->
+                            <!--<li><a href="#">5</a></li>-->
                             <li>
-                                <a href="#" aria-label="Next">
+                                <a id="next" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -237,6 +242,76 @@
 
 
 <script type="text/javascript">
+
+    $(function () {
+
+
+//        function setCurrent(pageNumber) {
+//            $('#pagination').data("currentPageNumber",currentPageNumber);
+//        }
+//
+//        function getCurrent(pageNumber) {
+//            $('#pagination').data("currentPageNumber");
+//        }
+
+
+        function set(_key,val,path) {
+            var key=_key;
+            var queryPath=location.search;
+            if(path){
+                queryPath=path;
+            }
+            if(queryPath.indexOf(key+"=")==-1){
+                return queryPath+'&'+key+"="+encodeURIComponent(val);
+            }else{
+                var regex=new RegExp(key+'=[0-9A-Za-z.%]+','g')
+                return queryPath.replace(regex,key+"="+encodeURIComponent(val));
+            }
+        }
+
+        function pageNumberPath(pageNumber,path) {
+            var key="pageNumber";
+            return set(key,pageNumber,path);
+        }
+
+
+        function categoryPath(category,path) {
+            var key="category";
+            return set(key,pageNumber,path);
+        }
+
+        function keywordPath(keyword,path) {
+            var key="keyword";
+            return set(key,keyword,path);
+        }
+
+        function load(queryPath){
+            window.location.href=location.href.substring(0,location.href.indexOf(location.search))+queryPath;
+        }
+
+
+        $('#previous')
+
+        $('a[name=current]').on('click',function (e) {
+            var pageNumber=$(e.target).data('pageNumber');
+            var queryPath=pageNumberPath(pageNumber)
+            load(queryPath);
+        })
+
+        $('#more')
+
+        $('#next')
+
+        $('#searchBtn').on('click',function () {
+
+            var keyword=$('#keyword').val();
+            var queryPath=keywordPath(keyword)
+            load(queryPath);
+        })
+
+
+    })
+
 
 
 </script>

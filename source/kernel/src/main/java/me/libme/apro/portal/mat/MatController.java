@@ -47,7 +47,11 @@ public class MatController {
 
     @NoClosureException
     @RequestMapping(value ="/list",method = RequestMethod.GET)
-    public String list(Model model, @RequestParam(name="tag",required = false) String tag) throws Exception{
+    public String list(Model model,
+                       @RequestParam(name="tag",required = false) String tag,
+                       @RequestParam(name="pageNumber",required = false) String pageNumber,
+                       @RequestParam(name="category",required = false) String category,
+                       @RequestParam(name="keyword",required = false) String keyword) throws Exception{
 
         String tagName=tag;
 
@@ -89,7 +93,12 @@ public class MatController {
 
         }
 
-        JPage<MatRecord> matRecordJPage=matAccessService.search(matCriteria,new SimplePageRequest(0,10));
+        matCriteria.setName(JStringUtils.isNullOrEmpty(keyword)?null:keyword);
+        matCriteria.setCategory(JStringUtils.isNullOrEmpty(category)?null:category);
+
+        int pageNum=JStringUtils.isNullOrEmpty(pageNumber)?0:Integer.parseInt(pageNumber);
+        JPage<MatRecord> matRecordJPage=matAccessService.search(matCriteria,
+                new SimplePageRequest(pageNum,3));
         model.addAttribute("page",matRecordJPage);
         model.addAttribute("categorys",categorys);
 

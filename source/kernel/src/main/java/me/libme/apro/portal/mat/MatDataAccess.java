@@ -39,18 +39,23 @@ public class MatDataAccess extends DataAccessSupport {
      */
     JPage<MatRecord> getMatRecordsByPage(MatCriteria matCriteria, SimplePageRequest simplePageRequest){
 
-        String sql="select DISTINCT  " +
-                " " +
-                "a.id as id , " +
-                "a.`name` as name, " +
-                "a.size as size, " +
-                "a._code as code, " +
-                "a._desc as description  " +
-                " ,a.img_id as imgId " +
-                "from t_mat  a " +
-                "left join t_mat_category_link b on a.id=b.mat_id " +
-                "left join t_mat_category c on b.category_id=c.id " +
-                "where a.deleted='N'  ";
+        String sql="SELECT " +
+                " ao.`name` AS NAME, " +
+                " ao.size AS size, " +
+                " ao._code AS CODE, " +
+                " ao._desc AS description, " +
+                " ao.img_id AS imgId " +
+                " FROM " +
+                " t_mat ao " +
+                " WHERE ao.deleted = 'N'  and  " +
+                " ao.id IN ( " +
+                "  SELECT " +
+                "  a.id AS id " +
+                "  FROM " +
+                "  t_mat a " +
+                "  LEFT JOIN t_mat_category_link b ON a.id = b.mat_id " +
+                "  LEFT JOIN t_mat_category c ON b.category_id = c.id " +
+                "  WHERE 1=1  " ;
 
         Map<String, JCondition.Condition> params=new HashMap<>();
 
@@ -86,6 +91,7 @@ public class MatDataAccess extends DataAccessSupport {
 //        Arrays.asList(categoryIds.split(",")).forEach(k->vals.add(k));
 //        paramObject.put("categoryIds",vals);
 
+        sql=sql+" ) ";
 
         return nativeQuery().setSql(sql).setParams(params(params))
                 .modelPage(simplePageRequest,MatRecord.class);
