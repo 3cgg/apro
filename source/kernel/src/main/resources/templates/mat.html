@@ -82,7 +82,7 @@
         <div class="c-sr-group ">
             <div class="c-sr-search">
                 <div class="row">
-                    <div class="col-lg-6 c-sr-search-tgroup">
+                    <div class="col-lg-6 col-md-6 c-sr-search-tgroup">
                         <div class="input-group">
                             <input id="keyword" th:value="${keyword}" type="text" class="form-control" placeholder="输入你要查询的名称">
                             <span class="input-group-btn">
@@ -100,7 +100,7 @@
                             <strong th:text="${entry.key}">布料分类：</strong>
                         </div>
                         <div class="c-sr-category-list ">
-                            <ul th:remove="all-but-first">
+                            <ul >
                                 <li th:each="category : ${entry.value}">
                                     <a href="javascript:void(0)" th:text="${category.name}"
                                         th:attr="data-code=${category.code}"
@@ -110,14 +110,7 @@
                                        name="categoryLink"
 
                                     >1680D系列加捻、提花...</a></li>
-                                <li><a href="">色织格子箱包布</a></li>
-                                <li><a href="">多色彩条帐篷布</a></li>
-                                <li><a href="">涤纶弹丝系列</a></li>
-                                <li><a href="">色织格子箱包布－客户产品...</a></li>
-                                <li><a href="">多色彩条帐篷布－客户产品...</a></li>
-                                <li><a href="">1680D系列加捻、提花...</a></li>
-                                <li><a href="">色织格子箱包布</a></li>
-                                <li><a href="">多色彩条帐篷布</a></li>
+                                <li><a href="javascript:void(0)" name="allCategoryLink" >全部分类</a></li>
                             </ul>
 
 
@@ -139,7 +132,7 @@
                     th:each="mat : ${page.content}"
                 >
                     <a href="mat-detail.html"
-                       th:href="@{/portal/mat/detail/${mat.id}}"
+                       th:href="@{/portal/mat/detail(matId=${mat.id})}"
                     ><img src="apro/img/blue.jpg"
                           th:src="${mat.imgFile.uri}"
                           alt="Generic placeholder image" width="140" height="140"></a>
@@ -307,8 +300,10 @@
 
 
         function instance(data) {
-
+            var url=location.href.substring(0,location.href.indexOf(location.pathname))
+                +"/api/portal/mat/detail";
             var $dom=$('#template').clone();
+            $dom.find('a').attr('href',url+"?matId="+data.id);
             $dom.find('img').attr('src',data.imgFile.uri);
             $dom.find('h2').text(data.name);
             $dom.find('p:nth-child(0)').text(data.code);
@@ -418,19 +413,31 @@
             load(queryPath);
 
             $('a[name=categoryLink]').removeClass('category-selected');
+            $('a[name=allCategoryLink]').removeClass('category-selected');
+            $(this).addClass('category-selected');
+
+        })
+
+        $('a[name=allCategoryLink]').on('click',function (e) {
+            var category='';
+            var queryPath=categoryPath(category);
+            load(queryPath);
+
+            $('a[name=categoryLink]').removeClass('category-selected');
             $(this).addClass('category-selected');
 
         })
 
         bindClickListener();
-        
-        
-        function highlight() {
 
+
+        function highlight() {
+            $('#matView').addClass('active');
 
             
         }
 
+        highlight();
 
     })
 

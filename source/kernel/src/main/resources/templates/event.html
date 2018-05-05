@@ -100,7 +100,7 @@
     <div class="container">
 
         <ol class="breadcrumb">
-            <li><a href="index.html">首页</a></li>
+            <li><a href="index.html"  th:href="@{/portal/index}"  >首页</a></li>
             <li class="active">公司动态</li>
         </ol>
 
@@ -114,52 +114,52 @@
             <ul class="list-group " style="margin-left: 30px" th:remove="all-but-first">
 
                 <li class="list-group-item-text list-group-item-padding c-event-li"  th:each="event : ${events}" >
-                    <a class="" th:href="@{/portal/event/detail(id=${event.id})}"  href="event-detail.html" th:text="${event.title}">——写在参观采访吴江市文教牛津布厂之后</a>
+                    <a class="" th:href="@{/portal/event/detail(contentId=${event.id})}"  href="event-detail.html" th:text="${event.title}">——写在参观采访吴江市文教牛津布厂之后</a>
                     <span th:text="${event.publishTime}">2018-04-02</span>
                 </li>
 
-                <li class="list-group-item-text list-group-item-padding c-event-li">
-                    <a class="" href="event-detail.html">——写在参观采访吴江市文教牛津布厂之后</a>
-                    <span>2018-04-02</span>
-                </li>
+                <!--<li class="list-group-item-text list-group-item-padding c-event-li">-->
+                    <!--<a class="" href="event-detail.html">——写在参观采访吴江市文教牛津布厂之后</a>-->
+                    <!--<span>2018-04-02</span>-->
+                <!--</li>-->
 
 
-                <li class="list-group-item-text list-group-item-padding c-event-li">
-                    <a class="" href="#">高需求、高质量、高色牢度</a>
-                    <span>2018-04-02</span>
-                </li>
-                <li class="list-group-item-text list-group-item-padding c-event-li">
-                    <a class="" href="#">吴江文教牛津布 真“牛</a>
-                    <span>2018-04-02</span>
-                </li>
-                <li class="list-group-item-text list-group-item-padding c-event-li">
-                    <a class="" href="#">文教牛津布:高档牛津布研发专家</a>
-                    <span>2018-04-02</span>
-                </li>
-                <li class="list-group-item-text list-group-item-padding c-event-li">
-                    <a class="" href="#">牛津布的品种及应用介绍</a>
-                    <span>2018-04-02</span>
-                </li>
-                <li class="list-group-item-text list-group-item-padding c-event-li">
-                    <a class="" href="#">——写在参观采访吴江市文教牛津布厂之后</a>
-                    <span>2018-04-02</span>
-                </li>
-                <li class="list-group-item-text list-group-item-padding c-event-li">
-                    <a class="" href="#">高需求、高质量、高色牢度</a>
-                    <span>2018-04-02</span>
-                </li>
-                <li class="list-group-item-text list-group-item-padding c-event-li">
-                    <a class="" href="#">吴江文教牛津布 真“牛</a>
-                    <span>2018-04-02</span>
-                </li>
-                <li class="list-group-item-text list-group-item-padding c-event-li">
-                    <a class="" href="#">文教牛津布:高档牛津布研发专家</a>
-                    <span>2018-04-02</span>
-                </li>
-                <li class="list-group-item-text list-group-item-padding c-event-li">
-                    <a class="" href="#">牛津布的品种及应用介绍</a>
-                    <span>2018-04-02</span>
-                </li>
+                <!--<li class="list-group-item-text list-group-item-padding c-event-li">-->
+                    <!--<a class="" href="#">高需求、高质量、高色牢度</a>-->
+                    <!--<span>2018-04-02</span>-->
+                <!--</li>-->
+                <!--<li class="list-group-item-text list-group-item-padding c-event-li">-->
+                    <!--<a class="" href="#">吴江文教牛津布 真“牛</a>-->
+                    <!--<span>2018-04-02</span>-->
+                <!--</li>-->
+                <!--<li class="list-group-item-text list-group-item-padding c-event-li">-->
+                    <!--<a class="" href="#">文教牛津布:高档牛津布研发专家</a>-->
+                    <!--<span>2018-04-02</span>-->
+                <!--</li>-->
+                <!--<li class="list-group-item-text list-group-item-padding c-event-li">-->
+                    <!--<a class="" href="#">牛津布的品种及应用介绍</a>-->
+                    <!--<span>2018-04-02</span>-->
+                <!--</li>-->
+                <!--<li class="list-group-item-text list-group-item-padding c-event-li">-->
+                    <!--<a class="" href="#">——写在参观采访吴江市文教牛津布厂之后</a>-->
+                    <!--<span>2018-04-02</span>-->
+                <!--</li>-->
+                <!--<li class="list-group-item-text list-group-item-padding c-event-li">-->
+                    <!--<a class="" href="#">高需求、高质量、高色牢度</a>-->
+                    <!--<span>2018-04-02</span>-->
+                <!--</li>-->
+                <!--<li class="list-group-item-text list-group-item-padding c-event-li">-->
+                    <!--<a class="" href="#">吴江文教牛津布 真“牛</a>-->
+                    <!--<span>2018-04-02</span>-->
+                <!--</li>-->
+                <!--<li class="list-group-item-text list-group-item-padding c-event-li">-->
+                    <!--<a class="" href="#">文教牛津布:高档牛津布研发专家</a>-->
+                    <!--<span>2018-04-02</span>-->
+                <!--</li>-->
+                <!--<li class="list-group-item-text list-group-item-padding c-event-li">-->
+                    <!--<a class="" href="#">牛津布的品种及应用介绍</a>-->
+                    <!--<span>2018-04-02</span>-->
+                <!--</li>-->
             </ul>
 
         </div>
@@ -211,6 +211,15 @@
 
 <script type="text/javascript">
 
+    $(function () {
+        function highlight() {
+            $('#eventView').addClass('active');
+
+
+        }
+
+        highlight();
+    })
 
 </script>
 

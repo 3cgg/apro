@@ -44,7 +44,8 @@ public class MatDataAccess extends DataAccessSupport {
                 " ao.size AS size, " +
                 " ao._code AS CODE, " +
                 " ao._desc AS description, " +
-                " ao.img_id AS imgId " +
+                " ao.img_id AS imgId ," +
+                " ao.id as id" +
                 " FROM " +
                 " t_mat ao " +
                 " WHERE ao.deleted = 'N'  and  " +

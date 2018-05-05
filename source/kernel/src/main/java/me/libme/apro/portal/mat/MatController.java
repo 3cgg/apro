@@ -176,8 +176,8 @@ public class MatController {
     }
 
     @NoClosureException
-    @RequestMapping(value ="/detail/{matId}", method = RequestMethod.GET)
-    public String detail(Model model,@PathVariable(name="matId") String id) throws Exception {
+    @RequestMapping(value ="/detail", method = RequestMethod.GET)
+    public String detail(Model model,@RequestParam(name="matId") String id) throws Exception {
 
         me.libme.apro.admin._mat.mat.vo.MatRecord matRecord= matService.getMatById(id);
         model.addAttribute("matRecord",matRecord);

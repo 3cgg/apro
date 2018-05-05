@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="~{head::copy(~{::title},_,~{::style},_,_)}" >
     <title>吴江市文教牛津布厂</title>
     <meta name=”description” content="吴江市文教牛津布厂 牛津布厂"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +41,7 @@
 
 </head>
 <body>
-
+<div th:replace="~{navbar::copy}">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -64,6 +64,7 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+</div>
 
 
 <!--<div id="myCarousel" class="carousel " data-ride="carousel">-->
@@ -98,8 +99,8 @@
     <div class="container">
 
         <ol class="breadcrumb">
-            <li><a href="index.html">首页</a></li>
-            <li class="active"><a href="event.html">公司动态</a></li>
+            <li><a href="index.html" th:href="@{/portal/index}" >首页</a></li>
+            <li class="active"><a href="event.html" th:href="@{/portal/event/list}" >公司动态</a></li>
             <li class="active">活动详情</li>
         </ol>
 
@@ -111,7 +112,7 @@
             <div class="row c-cd-head text-center">
                 ——写在参观采访吴江市文教牛津布厂之后
             </div>
-            <div class="row c-cd-body">
+            <div class="row c-cd-body" th:utext="${event.content}">
 
                 <p>吴江市文教牛津布厂成立于1985年，前身为校办企业， 2003年转制成为民营企业，该厂自1991年起生产牛津布，是全国最早生产牛津布的厂家之一，也是现在吴江地区为数不多的专业生产高档牛津布的厂家，被业界誉为精品牛津布研发“专家”。</p>
 
@@ -173,18 +174,29 @@
 
 
 
-<footer class="footer">
-    <div class="container">
-        <p class="text-muted">CopyRight © 2006-2010 吴江市文教牛津布厂</p>
-        <p class="text-muted">联系电话：0512-63360065  13812691192  13405281040   传真：0512-63369849  地址：吴江市民营开发区八坼镇南刘路</p>
-    </div>
-</footer>
+<div th:replace="~{footer :: copy}">
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">CopyRight © 2006-2010 吴江市文教牛津布厂</p>
+            <p class="text-muted">联系电话：0512-63360065  13812691192  13405281040   传真：0512-63369849  地址：吴江市民营开发区八坼镇南刘路</p>
+        </div>
+    </footer>
+</div>
 
 </body>
 
 
 <script type="text/javascript">
 
+    $(function () {
+        function highlight() {
+            $('#eventView').addClass('active');
+
+
+        }
+
+        highlight();
+    })
 
 </script>
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"   xmlns:th="http://www.thymeleaf.org" >
+<head  th:replace="~{head::copy(~{::title},_,~{::style},_,_)}" >
     <title>吴江市文教牛津布厂</title>
     <meta name=”description” content="吴江市文教牛津布厂 牛津布厂"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@
 
 </head>
 <body>
-
+<div th:replace="~{navbar::copy}">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -63,7 +63,7 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
+</div>
 
 <!--<div id="myCarousel" class="carousel " data-ride="carousel">-->
     <!--&lt;!&ndash; Indicators &ndash;&gt;-->
@@ -97,7 +97,7 @@
     <div class="container">
 
         <ol class="breadcrumb">
-            <li><a href="index.html">首页</a></li>
+            <li><a href="index.html" th:href="@{/portal/index}" >首页</a></li>
             <li class="active">关于我们</li>
         </ol>
 
@@ -106,10 +106,8 @@
     <div class="container">
 
         <div class="col-lg-9 c-about">
-            <div class="jumbotron c-about-detail">
-                <p>吴江市文教牛津布厂简介 本厂成立于1985年，原属于校办企业，2003年转制为民营企业。现工厂座落在吴江市八坼民营开发区南刘路。本厂自1990年起生产牛津布，是中国大陆上最早专业生产牛津布的几家工厂之一，也是迄今为止这几家工厂中，唯一继续专业生产牛津布的工厂。目前织造设备有大龙头织机配备四喷、三喷、二喷、提花龙头机、双泵双喷龙头机、 多选纬剑杆机等，前道设备有落丝车、倍捻机、分条整经车等。自牛津布上市以来，本厂认定牛津布不放，一直专注于生产、研发各种规格的牛津布，在多年的实践过程中，开发了许多新产品，摸索了大量的经验和教训，提高了企业各方面的素质和实力。 本工厂一向秉承“宁精勿滥”的生产方针，现侧重于生产加捻、加重、加厚、加密箱包、帐篷牛津布，色织牛津布，特殊、特种规格的牛津布。产品覆盖涤纶弹丝150D、300D、450D、600D、900D、1200D、1500D、1800D、2400D 、3000D及涤纶长丝210D、420D、840D、1200D以及1680D、2520D加捻系列精品箱包布等各种规格平纹、斜纹、提花、色织条子、色织格子牛津布。</p>
-                <p>本厂年生产总值超亿元，常年供应牛津布面料，产品远销美国、马来西亚等国。我厂曾先后为康奈集团、上海互邦医疗器械有限公司、江苏鱼跃医疗等国内大型上市企业供应面料，以信誉达成合作、质量赢得市场，更被业内誉为“牛津布大王”。</p>
-                <p>牛津布——质地坚，价格低，品种多，色泽艳、用途广，现在越来越多的领域相继采用，如：箱包面料、里料，帐篷、遮阳伞、马衣、炮衣、睡袋、车用椅套、沙滩椅、气膜布料、广告布类、热涨管对垫等布料以及鞋子面料、里料，服装面料、里料等等。 本厂销售宗旨是“质量满意、价格合理、交货及时、信誉第一”，我们一贯以诚信的态度与新老客户合作，认真操作，急客户所急，想客户所想，友好合作，共同发展，欢迎海内外朋友来样定制，开发新品。       </p>
+            <div class="jumbotron c-about-detail" th:utext="${aboutus.detail}">
+
             </div>
 
         </div>
@@ -147,18 +145,29 @@
 
 
 
-<footer class="footer">
-    <div class="container">
-        <p class="text-muted">CopyRight © 2006-2010 吴江市文教牛津布厂</p>
-        <p class="text-muted">联系电话：0512-63360065  13812691192  13405281040   传真：0512-63369849  地址：吴江市民营开发区八坼镇南刘路</p>
-    </div>
-</footer>
+<div th:replace="~{footer :: copy}">
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">CopyRight © 2006-2010 吴江市文教牛津布厂</p>
+            <p class="text-muted">联系电话：0512-63360065  13812691192  13405281040   传真：0512-63369849  地址：吴江市民营开发区八坼镇南刘路</p>
+        </div>
+    </footer>
+</div>
 
 </body>
 
 
 <script type="text/javascript">
 
+    $(function () {
+        function highlight() {
+            $('#aboutusView').addClass('active');
+
+
+        }
+
+        highlight();
+    })
 
 </script>
 

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class EventController {
     @Autowired
     private ContentManagerService contentManagerService;
 
-    @RequestMapping(value ="/detail/{contentId}", method = RequestMethod.GET)
-    public String detail(Model model,@PathVariable(name = "contentId") String contentId) throws Exception{
+    @RequestMapping(value ="/detail", method = RequestMethod.GET)
+    public String detail(Model model,@RequestParam(name = "contentId") String contentId) throws Exception{
         ContentRecord contentRecord=contentManagerService.getContentById(contentId);
         model.addAttribute("event",contentRecord);
         return "/event-detail";
