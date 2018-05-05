@@ -84,7 +84,7 @@
                 <div class="row">
                     <div class="col-lg-6 c-sr-search-tgroup">
                         <div class="input-group">
-                            <input id="keyword" type="text" class="form-control" placeholder="输入你要查询的名称">
+                            <input id="keyword" th:value="${keyword}" type="text" class="form-control" placeholder="输入你要查询的名称">
                             <span class="input-group-btn">
                                 <button id="searchBtn" class="btn btn-default" type="button">查询</button>
                             </span>
@@ -102,9 +102,11 @@
                         <div class="c-sr-category-list ">
                             <ul th:remove="all-but-first">
                                 <li th:each="category : ${entry.value}">
-                                    <a href="" th:text="${category.name}"
+                                    <a href="javascript:void(0)" th:text="${category.name}"
                                         th:attr="data-code=${category.code}"
                                        th:alt-title="${category.code}"
+
+                                       name="categoryLink"
 
                                     >1680D系列加捻、提花...</a></li>
                                 <li><a href="">色织格子箱包布</a></li>
@@ -131,7 +133,7 @@
         <div class="marketing c-mat-group" th:remove="all-but-first" >
 
             <!-- Three columns of text below the carousel -->
-            <div class="row" th:remove="all-but-first">
+            <div class="row" th:remove="all-but-first"  id="matContainer">
                 <div class="col-lg-4 col-md-4 c-mat-group-list"
                     th:each="mat : ${page.content}"
                 >
@@ -184,30 +186,34 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4" style="float: inherit !important; margin: auto">
 
-                    <nav aria-label="Page navigation" style="text-align: center">
-                        <ul id="pagination" class="pagination" th:attr="data-total-page-number=${page.totalPageNumber}">
+                    <nav aria-label="Page navigation" style="text-align: center" id="paginationNav">
+                        <div th:replace="~{pagination :: copy}">
+                        <ul name="pagination" class="pagination">
                             <li>
-                                <a id="previous" href="#" aria-label="Previous">
+                                <a name="previous" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li th:each="i,stat:${#numbers.sequence(0, page.totalPageNumber)}" th:attr="data-page-number=${i}"  >
-                                <a name="current" href="javascript:void(0)" th:text="${i+1}" th:attr="data-page-number=${i}"
-                                   th:if="${i<2}" >1</a>
-                                <a id="more" href="javascript:void(0)" class="active"
-                                   th:if="${i==2}" >...</a>
-                            </li>
-                            <!--<li><a href="#">2</a></li>-->
-                            <!--<li><a href="#">3</a></li>-->
-                            <!--<li><a href="#">4</a></li>-->
-                            <!--<li><a href="#">5</a></li>-->
+                            <!--<li th:each="i,stat:${#numbers.sequence(0, page.totalPageNumber)}" th:attr="data-page-number=${i}"  >-->
+                                <!--<a name="current" href="javascript:void(0)" th:text="${i+1}" th:attr="data-page-number=${i}"-->
+                                   <!--th:if="${i<2}" >1</a>-->
+                                <!--<a name="more" href="javascript:void(0)" class="active"-->
+                                   <!--th:if="${i==2}" >...</a>-->
+                            <!--</li>-->
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
                             <li>
-                                <a id="next" href="#" aria-label="Next">
+                                <a name="next" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                         </ul>
+                        </div>
                     </nav>
+
                 </div>
             </div>
 
@@ -238,6 +244,19 @@
 </div>
 
 
+<div  style="display: none;" >
+
+    <div id="template" class="col-lg-4 col-md-4 c-mat-group-list" >
+        <a href="mat-detail.html">
+            <img class="" alt="Generic placeholder image" width="140" height="140">
+        </a>
+        <h2>蓝色布料</h2>
+        <p>品名：F420菱形格-2</p>
+        <p>规格：420D*420D</p>
+    </div><!-- /.col-lg-4 -->
+
+</div>
+
 </body>
 
 
@@ -264,7 +283,7 @@
             if(queryPath.indexOf(key+"=")==-1){
                 return queryPath+'&'+key+"="+encodeURIComponent(val);
             }else{
-                var regex=new RegExp(key+'=[0-9A-Za-z.%]+','g')
+                var regex=new RegExp(key+'=[0-9A-Za-z.%]*','g')
                 return queryPath.replace(regex,key+"="+encodeURIComponent(val));
             }
         }
@@ -277,7 +296,7 @@
 
         function categoryPath(category,path) {
             var key="category";
-            return set(key,pageNumber,path);
+            return set(key,category,path);
         }
 
         function keywordPath(keyword,path) {
@@ -285,22 +304,105 @@
             return set(key,keyword,path);
         }
 
-        function load(queryPath){
-            window.location.href=location.href.substring(0,location.href.indexOf(location.search))+queryPath;
+
+        function instance(data) {
+
+            var $dom=$('#template').clone();
+            $dom.find('img').attr('src',data.imgFile.uri);
+            $dom.find('h2').text(data.name);
+            $dom.find('p:nth-child(0)').text(data.code);
+            $dom.find('p:nth-child(1)').text(data.size);
+            return $dom;
         }
 
 
-        $('#previous')
+        function load(queryPath){
+            var qp=queryPath[0]=='?'?queryPath:('?'+queryPath);
+            var url=location.href.substring(0,location.href.indexOf(location.pathname))
+                +"/api/portal/mat/search"+qp;
+            var showUrl=location.href.substring(0,location.href.indexOf(location.pathname))
+                +"/api/portal/mat/list"+qp;
 
-        $('a[name=current]').on('click',function (e) {
-            var pageNumber=$(e.target).data('pageNumber');
-            var queryPath=pageNumberPath(pageNumber)
+            $.ajax({
+                url: url,
+                type:'GET',
+                success: function(data){
+                    var $dom=[];
+                    var contents=data.data.data;
+                    for(var i=0;i<contents.length;i++){
+                        var content=contents[i];
+                        $dom.push(instance(content));
+                    }
+
+                    $('#matContainer').empty();
+                    $('#matContainer').html($dom);
+                    history.pushState(null,"",showUrl);
+
+                    var paginationUrl=location.href.substring(0,location.href.indexOf(location.pathname))
+                        +"/api/portal/mat/pagination?"
+                        +"pageNumber="+data.data.pageable.pageNumber
+                        +"&totalPageNumber="+data.data.totalPageNumber;
+
+                    $.ajax({
+                        url: paginationUrl,
+                        type:'GET',
+                        success: function(data){
+
+                            $('#paginationNav').empty();
+                            $('#paginationNav').html(data);
+                            bindClickListener();
+
+                        },
+                        error:function(data){
+
+                        }
+                    });
+
+
+
+                },
+                error:function(data){
+
+                }
+            });
+
+        }
+
+
+        function goPageFn(pageNumber) {
+//            var pageNumber=$(e.target).data('pageNumber');
+            var queryPath=pageNumberPath(pageNumber);
             load(queryPath);
-        })
+        }
 
-        $('#more')
 
-        $('#next')
+
+        function bindClickListener() {
+
+            $('a[name=current]').on('click',function (e) {
+                var pageNumber=$(e.target).data('pageNumber');
+                goPageFn(pageNumber);
+            });
+
+            $('a[name=previous]').on('click',function (e) {
+                var pageNumber=$(this).data('pageNumber');
+                goPageFn(pageNumber);
+            });
+
+//            $('a[name=more]')
+
+            $('a[name=next]').on('click',function (e) {
+                var pageNumber=$(this).data('pageNumber');
+                goPageFn(pageNumber);
+
+            });
+
+
+
+        }
+
+
+
 
         $('#searchBtn').on('click',function () {
 
@@ -308,6 +410,14 @@
             var queryPath=keywordPath(keyword)
             load(queryPath);
         })
+
+        $('a[name=categoryLink]').on('click',function (e) {
+            var category=$(e.target).data('code');
+            var queryPath=categoryPath(category);
+            load(queryPath);
+        })
+
+        bindClickListener();
 
 
     })

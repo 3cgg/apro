@@ -12,7 +12,6 @@ import me.libme.webboot.ResponseModel;
 import me.libme.webseed.fn.kv.CodeDictService;
 import me.libme.webseed.fn.mock.Mock;
 import me.libme.webseed.web.NoClosureException;
-import me.libme.webseed.web.SimplePageRequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,6 +101,11 @@ public class MatController {
         model.addAttribute("page",matRecordJPage);
         model.addAttribute("categorys",categorys);
 
+        model.addAttribute("keyword",keyword);
+
+        model.addAttribute("pageNumber",pageNum);
+        model.addAttribute("totalPageNumber",matRecordJPage.getTotalPageNumber());
+
         return "/mat";
     }
 
@@ -119,9 +123,53 @@ public class MatController {
     @RequestMapping(value ="/search",method = RequestMethod.GET)
     @ResponseBody
     @Mock(type =MatRecord[].class,pageable =true)
-    public ResponseModel search(MatCriteria matCriteria, SimplePageRequestVO pageRequestVO) throws Exception {
-        JPage<MatRecord> matRecordJPage=matAccessService.search(matCriteria,new SimplePageRequest(pageRequestVO.getPageNumber(),pageRequestVO.getPageSize()));
+    public ResponseModel search(
+                                @RequestParam(name="tag",required = false) String tag,
+                                @RequestParam(name="pageNumber",required = false) String pageNumber,
+                                @RequestParam(name="category",required = false) String category,
+                                @RequestParam(name="keyword",required = false) String keyword) throws Exception {
+        String tagName=tag;
+
+        if(JStringUtils.isNotNullOrEmpty(tag)
+                &&tag.startsWith("http://")){
+            URI uri=new URI(tag);
+            String query=uri.toURL().getQuery();
+            tagName=query.split("=")[1].trim();
+        }
+
+        MatCriteria matCriteria=new MatCriteria();
+        List<String> categoryIds=new ArrayList<>();
+
+        if(JStringUtils.isNotNullOrEmpty(tagName)) {
+            List<MatCategoryRecord> matCategoryRecords = matCategoryService.getMatCategoryByGroup(tagName);
+            matCategoryRecords.forEach(matCategoryRecord -> categoryIds.add(matCategoryRecord.getId()));
+            matCriteria.setCategoryIds(String.join(",", categoryIds));
+        }else{
+            List<MatCategoryRecord> matCategoryRecords = matCategoryService.getMatCategoryByGroup(null);
+            matCategoryRecords.forEach(matCategoryRecord -> {  // group by category group
+                categoryIds.add(matCategoryRecord.getId());
+            });
+            matCriteria.setCategoryIds(String.join(",", categoryIds));
+        }
+
+        matCriteria.setName(JStringUtils.isNullOrEmpty(keyword)?null:keyword);
+        matCriteria.setCategory(JStringUtils.isNullOrEmpty(category)?null:category);
+
+        int pageNum=JStringUtils.isNullOrEmpty(pageNumber)?0:Integer.parseInt(pageNumber);
+        JPage<MatRecord> matRecordJPage=matAccessService.search(matCriteria,
+                new SimplePageRequest(pageNum,3));
         return ResponseModel.newSuccess(matRecordJPage);
+    }
+
+    @NoClosureException
+    @RequestMapping(value ="/pagination",method = RequestMethod.GET)
+    public String pagination(Model model,
+                       @RequestParam(name="pageNumber") String pageNumber,
+                       @RequestParam(name="totalPageNumber") String totalPageNumber) throws Exception{
+
+        model.addAttribute("pageNumber",Integer.parseInt(pageNumber));
+        model.addAttribute("totalPageNumber",Integer.parseInt(totalPageNumber));
+        return "pagination";
     }
 
     @NoClosureException

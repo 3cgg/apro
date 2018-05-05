@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN"   xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+</head>
+<body>
+
+
+<ul th:fragment="copy" name="pagination" class="pagination"
+    th:attr="data-total-page-number=${totalPageNumber}"
+>
+
+    <!--<style>-->
+        <!--.pagination-clicked{-->
+            <!--background-color: #e7e7e7;!important;-->
+        <!--}-->
+        <!--.pagination-unclicked{-->
+            <!--background-color: transparent;!important;-->
+        <!--}-->
+
+    <!--</style>-->
+
+    <li>
+        <a name="previous" href="javascript:void(0)" aria-label="Previous"
+           th:attr="data-page-number=${(pageNumber-1)<0}?0:${pageNumber-1}"
+        >
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    <li th:each="i,stat:${#numbers.sequence(0, totalPageNumber)}" th:attr="data-page-number=${i}"  >
+        <a name="current" href="javascript:void(0)" th:text="${i+1}" th:attr="data-page-number=${i}"
+           th:if="${i<(pageNumber+2)}"
+           th:classappend="${i==pageNumber}? 'pagination-clicked' "
+           th:styleappend="${i==pageNumber}? 'background-color: #e7e7e7;'"
+        >1</a>
+        <a name="more" href="javascript:void(0)" class="active"
+           th:if="${i==(pageNumber+2)}" >...</a>
+    </li>
+    <!--<li><a href="#">2</a></li>-->
+    <!--<li><a href="#">3</a></li>-->
+    <!--<li><a href="#">4</a></li>-->
+    <!--<li><a href="#">5</a></li>-->
+    <li>
+        <a name="next" href="javascript:void(0)" aria-label="Next"
+           th:attr="data-page-number=${(pageNumber+1)<totalPageNumber}?${pageNumber+1}:${totalPageNumber}"
+        >
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</ul>
+
+
+
+</body>
+</html>
