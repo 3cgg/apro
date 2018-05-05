@@ -105,6 +105,7 @@
                                     <a href="javascript:void(0)" th:text="${category.name}"
                                         th:attr="data-code=${category.code}"
                                        th:alt-title="${category.code}"
+                                       th:classappend="${category.code==selectedCategory}? 'category-selected '"
 
                                        name="categoryLink"
 
@@ -412,12 +413,23 @@
         })
 
         $('a[name=categoryLink]').on('click',function (e) {
-            var category=$(e.target).data('code');
+            var category=$(this).data('code');
             var queryPath=categoryPath(category);
             load(queryPath);
+
+            $('a[name=categoryLink]').removeClass('category-selected');
+            $(this).addClass('category-selected');
+
         })
 
         bindClickListener();
+        
+        
+        function highlight() {
+
+
+            
+        }
 
 
     })

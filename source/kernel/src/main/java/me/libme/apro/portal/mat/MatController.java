@@ -106,6 +106,9 @@ public class MatController {
         model.addAttribute("pageNumber",pageNum);
         model.addAttribute("totalPageNumber",matRecordJPage.getTotalPageNumber());
 
+        model.addAttribute("keyword",JStringUtils.isNullOrEmpty(keyword)?"":keyword);
+        model.addAttribute("selectedCategory",JStringUtils.isNullOrEmpty(category)?"":category);
+
         return "/mat";
     }
 

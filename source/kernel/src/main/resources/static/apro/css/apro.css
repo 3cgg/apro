@@ -246,7 +246,13 @@ body {
 }
 
 
+.category-selected{
+    background-color: #e4e4e4;
+}
 
+.category-unselected{
+    /*color: transparent;*/
+}
 
 
 
