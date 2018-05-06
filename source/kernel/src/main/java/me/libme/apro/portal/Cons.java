@@ -16,6 +16,10 @@ public interface Cons {
         String EVENT="EVENT";
     }
 
+    interface Sys{
+        String MAT_PAGE_SIZE="MAT_PAGE_SIZE";
+    }
+
 
 
 }

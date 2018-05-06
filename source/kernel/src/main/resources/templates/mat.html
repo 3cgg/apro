@@ -84,9 +84,9 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 c-sr-search-tgroup">
                         <div class="input-group">
-                            <input id="keyword" th:value="${keyword}" type="text" class="form-control" placeholder="输入你要查询的名称">
+                            <input id="keyword" th:value="${keyword}" type="text" class="form-control" placeholder="">
                             <span class="input-group-btn">
-                                <button id="searchBtn" class="btn btn-default" type="button">查询</button>
+                                <button id="searchBtn" class="btn btn-default" type="button" th:text="#{apro.search}" >查询</button>
                             </span>
                         </div><!-- /input-group -->
                     </div><!-- /.col-lg-6 -->
@@ -97,7 +97,7 @@
 
 
                         <div class="c-sr-category-label ">
-                            <strong th:text="${entry.key}">布料分类：</strong>
+                            <strong th:text="${entry.key}+':'">布料分类：</strong>
                         </div>
                         <div class="c-sr-category-list ">
                             <ul >
@@ -110,8 +110,11 @@
                                        name="categoryLink"
 
                                     >1680D系列加捻、提花...</a></li>
-                                <li><a href="javascript:void(0)" name="allCategoryLink" >全部分类</a></li>
+                                <li><a href="javascript:void(0)" name="allCategoryLink" th:text="#{apro.cateogry.all}"
+                                    style="font-size: 24px;"
+                                >全部分类</a></li>
                             </ul>
+                            <!--<div style="width: 100%;display: table-cell"></div>-->
 
 
                         </div>
@@ -127,7 +130,7 @@
         <div class="marketing c-mat-group" th:remove="all-but-first" >
 
             <!-- Three columns of text below the carousel -->
-            <div class="row" th:remove="all-but-first"  id="matContainer">
+            <div class="row" id="matContainer">
                 <div class="col-lg-4 col-md-4 c-mat-group-list"
                     th:each="mat : ${page.content}"
                 >
@@ -140,38 +143,38 @@
                     <p th:text="${mat.code}">品名：F420菱形格-2</p>
                     <p th:text="${mat.size}">规格：420D*420D</p>
                 </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4 col-md-4 c-mat-group-list">
-                    <a href="mat-detail.html"><img class="" src="apro/img/green.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-                    <h2>绿色布料</h2>
-                    <p>品名：F420菱形格-2</p>
-                    <p>规格：420D*420D</p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4 col-md-4 c-mat-group-list">
-                    <a href="mat-detail.html"><img class="" src="apro/img/red.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-                    <h2>红色布料</h2>
-                    <p>品名：F420菱形格-2</p>
-                    <p>规格：420D*420D</p>
-                </div><!-- /.col-lg-4 -->
-            <!--</div>&lt;!&ndash; /.row &ndash;&gt;-->
-            <!--<div class="row">-->
-                <div class="col-lg-4 col-md-4 c-mat-group-list">
-                    <a href="mat-detail.html"><img class="" src="apro/img/blue.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-                    <h2>蓝色布料</h2>
-                    <p>品名：F420菱形格-2</p>
-                    <p>规格：420D*420D</p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4 col-md-4 c-mat-group-list">
-                    <a href="mat-detail.html"><img class="" src="apro/img/green.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-                    <h2>绿色布料</h2>
-                    <p>品名：F420菱形格-2</p>
-                    <p>规格：420D*420D</p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4 col-md-4 c-mat-group-list">
-                    <a href="mat-detail.html"><img class="" src="apro/img/red.jpg" alt="Generic placeholder image" width="140" height="140"></a>
-                    <h2>红色布料</h2>
-                    <p>品名：F420菱形格-2</p>
-                    <p>规格：420D*420D</p>
-                </div><!-- /.col-lg-4 -->
+                <!--<div class="col-lg-4 col-md-4 c-mat-group-list">-->
+                    <!--<a href="mat-detail.html"><img class="" src="apro/img/green.jpg" alt="Generic placeholder image" width="140" height="140"></a>-->
+                    <!--<h2>绿色布料</h2>-->
+                    <!--<p>品名：F420菱形格-2</p>-->
+                    <!--<p>规格：420D*420D</p>-->
+                <!--</div>&lt;!&ndash; /.col-lg-4 &ndash;&gt;-->
+                <!--<div class="col-lg-4 col-md-4 c-mat-group-list">-->
+                    <!--<a href="mat-detail.html"><img class="" src="apro/img/red.jpg" alt="Generic placeholder image" width="140" height="140"></a>-->
+                    <!--<h2>红色布料</h2>-->
+                    <!--<p>品名：F420菱形格-2</p>-->
+                    <!--<p>规格：420D*420D</p>-->
+                <!--</div>&lt;!&ndash; /.col-lg-4 &ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&lt;!&ndash; /.row &ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                <!--<div class="col-lg-4 col-md-4 c-mat-group-list">-->
+                    <!--<a href="mat-detail.html"><img class="" src="apro/img/blue.jpg" alt="Generic placeholder image" width="140" height="140"></a>-->
+                    <!--<h2>蓝色布料</h2>-->
+                    <!--<p>品名：F420菱形格-2</p>-->
+                    <!--<p>规格：420D*420D</p>-->
+                <!--</div>&lt;!&ndash; /.col-lg-4 &ndash;&gt;-->
+                <!--<div class="col-lg-4 col-md-4 c-mat-group-list">-->
+                    <!--<a href="mat-detail.html"><img class="" src="apro/img/green.jpg" alt="Generic placeholder image" width="140" height="140"></a>-->
+                    <!--<h2>绿色布料</h2>-->
+                    <!--<p>品名：F420菱形格-2</p>-->
+                    <!--<p>规格：420D*420D</p>-->
+                <!--</div>&lt;!&ndash; /.col-lg-4 &ndash;&gt;-->
+                <!--<div class="col-lg-4 col-md-4 c-mat-group-list">-->
+                    <!--<a href="mat-detail.html"><img class="" src="apro/img/red.jpg" alt="Generic placeholder image" width="140" height="140"></a>-->
+                    <!--<h2>红色布料</h2>-->
+                    <!--<p>品名：F420菱形格-2</p>-->
+                    <!--<p>规格：420D*420D</p>-->
+                <!--</div>&lt;!&ndash; /.col-lg-4 &ndash;&gt;-->
             </div><!-- /.row -->
         </div><!-- /.container -->
 

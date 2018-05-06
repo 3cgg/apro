@@ -5,17 +5,22 @@ import me.libme.apro.admin._mat.mat.service.MatService;
 import me.libme.apro.admin._mat.mat.vo.MatRecord;
 import me.libme.apro.admin._mat.matcategory.service.MatCategoryService;
 import me.libme.apro.admin._mat.matcategory.vo.MatCategoryRecord;
+import me.libme.apro.portal.Cons;
 import me.libme.kernel._c._m.JPage;
 import me.libme.kernel._c._m.SimplePageRequest;
 import me.libme.kernel._c.util.JStringUtils;
 import me.libme.webboot.ResponseModel;
+import me.libme.webseed._b._core.sysparam.service.SysParamService;
 import me.libme.webseed.fn.kv.CodeDictService;
 import me.libme.webseed.fn.mock.Mock;
 import me.libme.webseed.web.NoClosureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -42,6 +47,15 @@ public class MatController {
 
     @Autowired
     private CodeDictService codeDictService;
+
+    @Autowired
+    private SysParamService sysParamService;
+
+
+    private int pageSize() throws Exception{
+        String val=sysParamService.getVal(Cons.Sys.MAT_PAGE_SIZE).getValue();
+        return Integer.parseInt(val);
+    }
 
 
     @NoClosureException
@@ -97,7 +111,7 @@ public class MatController {
 
         int pageNum=JStringUtils.isNullOrEmpty(pageNumber)?0:Integer.parseInt(pageNumber);
         JPage<MatRecord> matRecordJPage=matAccessService.search(matCriteria,
-                new SimplePageRequest(pageNum,3));
+                new SimplePageRequest(pageNum,pageSize()));
         model.addAttribute("page",matRecordJPage);
         model.addAttribute("categorys",categorys);
 
@@ -160,7 +174,7 @@ public class MatController {
 
         int pageNum=JStringUtils.isNullOrEmpty(pageNumber)?0:Integer.parseInt(pageNumber);
         JPage<MatRecord> matRecordJPage=matAccessService.search(matCriteria,
-                new SimplePageRequest(pageNum,3));
+                new SimplePageRequest(pageNum,pageSize()));
         return ResponseModel.newSuccess(matRecordJPage);
     }
 
@@ -184,6 +198,20 @@ public class MatController {
 
         return "/mat-detail";
     }
+
+
+    @NoClosureException
+    @RequestMapping(value ="/recommend", method = RequestMethod.GET)
+    public String detail(Model model) throws Exception {
+
+        int pageNum=0;
+        JPage<MatRecord> matRecordJPage=matAccessService.search(new MatCriteria(),
+                new SimplePageRequest(pageNum,Integer.parseInt(sysParamService.getVal("MAT_REC_SIZE").getValue())));
+        model.addAttribute("page",matRecordJPage);
+
+        return "/mat-recommend";
+    }
+
 
 
 }

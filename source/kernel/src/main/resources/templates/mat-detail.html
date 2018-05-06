@@ -98,9 +98,9 @@
     <div class="container">
 
         <ol class="breadcrumb">
-            <li><a href="index.html" th:href="@{/portal/index}"  >首页</a></li>
-            <li class="active"><a href="mat.html" th:href="@{/portal/mat/list}"  >我们的产品</a></li>
-            <li class="active">产品详情</li>
+            <li><a href="index.html" th:href="@{/portal/index}" th:text="#{apro.nav.index}" >首页</a></li>
+            <li class="active"><a href="mat.html" th:href="@{/portal/mat/list}"  th:text="#{apro.nav.mat}">我们的产品</a></li>
+            <li class="active" th:text="#{apro.detail}" >产品详情</li>
         </ol>
 
     </div>
@@ -112,26 +112,26 @@
 
         </div>
 
-        <div class="col-lg-3">
-            <div class="">
-                <a href="#"><img class="img-thumbnail" src="apro/img/blue.jpg" alt="..."></a>
-                <div class="caption text-center">
-                    <p>蓝色布料</p>
+        <div class="col-lg-3" id="recommendList">
+            <!--<div class="">-->
+                <!--<a href="#"><img class="img-thumbnail" src="apro/img/blue.jpg" alt="..."></a>-->
+                <!--<div class="caption text-center">-->
+                    <!--<p>蓝色布料</p>-->
 
-                </div>
-            </div>
-            <div class="">
-                <a href="#"><img class="img-thumbnail" src="apro/img/green.jpg" alt="..."></a>
-                <div class="caption text-center">
-                    <p>绿色布料</p>
-                </div>
-            </div>
-            <div class="">
-                <a href="#"><img class="img-thumbnail" src="apro/img/red.jpg" alt="..."></a>
-                <div class="caption text-center">
-                    <p>红色布料</p>
-                </div>
-            </div>
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="">-->
+                <!--<a href="#"><img class="img-thumbnail" src="apro/img/green.jpg" alt="..."></a>-->
+                <!--<div class="caption text-center">-->
+                    <!--<p>绿色布料</p>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="">-->
+                <!--<a href="#"><img class="img-thumbnail" src="apro/img/red.jpg" alt="..."></a>-->
+                <!--<div class="caption text-center">-->
+                    <!--<p>红色布料</p>-->
+                <!--</div>-->
+            <!--</div>-->
 
         </div>
 
@@ -174,8 +174,30 @@
 
 
         }
-
         highlight();
+
+
+        (function renderRecMat() {
+            var recommendUrl=location.href.substring(0,location.href.indexOf(location.pathname))
+                +"/api/portal/mat/recommend";
+
+            $.ajax({
+                url: recommendUrl,
+                type:'GET',
+                success: function(data){
+
+                    $('#recommendList').empty();
+                    $('#recommendList').html(data);
+                },
+                error:function(data){
+
+                }
+            });
+        })();
+
+
+
+
     })
 
 </script>

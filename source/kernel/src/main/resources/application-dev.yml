@@ -47,6 +47,9 @@ spring :
          content-type : text/html # Content-Type value.
          cache : false # Enable template caching.
          prefix : classpath:/templates/
+    messages :
+         cache-seconds : 1
+         encoding : UTF-8
 
 server : 
     port : 8989 #8989

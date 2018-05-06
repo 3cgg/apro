@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN"   xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+</head>
+<body>
+
+<!--<div class="">-->
+<!--<a href="#"><img class="img-thumbnail" src="apro/img/blue.jpg" alt="..."></a>-->
+<!--<div class="caption text-center">-->
+<!--<p>蓝色布料</p>-->
+
+<!--</div>-->
+<!--</div>-->
+<div class=""
+     th:each="mat : ${page.content}"
+>
+    <a href="mat-detail.html"
+       th:href="@{/portal/mat/detail(matId=${mat.id})}"
+    ><img src="apro/img/blue.jpg" class="img-thumbnail"
+          th:src="${mat.imgFile.uri}"
+          alt="Generic placeholder image"></a>
+    <div class="caption text-center">
+        <p  th:text="${mat.name}" >蓝色布料</p>
+
+    </div>
+</div><!-- /.col-lg-4 -->
+
+<!--<div class="">-->
+<!--<a href="#"><img class="img-thumbnail" src="apro/img/green.jpg" alt="..."></a>-->
+<!--<div class="caption text-center">-->
+<!--<p>绿色布料</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="">-->
+<!--<a href="#"><img class="img-thumbnail" src="apro/img/red.jpg" alt="..."></a>-->
+<!--<div class="caption text-center">-->
+<!--<p>红色布料</p>-->
+<!--</div>-->
+<!--</div>-->
+
+</body>
+</html>
