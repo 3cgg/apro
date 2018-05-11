@@ -37,18 +37,74 @@
 
         .c-photo{
             padding-left: 15px;
-            margin-top: 15px;
+            margin-top: 0px;
 
+        }
+
+        .c-photo .carousel{
+            /*height: 450px;*/
         }
 
         .c-photo .c-photo-list{
+            margin-top: 10px;
+        }
 
+        .c-photo .c-photo-list .c-photo-list-item{
+            float: left;
+            height: 90px;
+            width: 90px;
+            margin-left: 5px;
+        }
+        .c-photo .c-photo-list .c-photo-list-item-left{
+            border: 0px solid #ddd;
+            padding: 20px 0px 15px 15px;
+            margin-left: 0px;
+        }
+
+        .c-photo .c-photo-list .c-photo-list-item-left a {
+            border: 0px solid #ddd;
+            /*padding: 20px 0px 15px 15px;*/
+            font-size: 40px;
+            color: #e7e7e7;
+        }
+
+        .c-photo-list-item-left a :hover{
+            color: #337ab7;
+        }
+
+        .c-photo .c-photo-list .c-photo-list-item-right{
+            border: 0px solid #ddd;
+            padding: 20px 15px 0px 0px;
+            margin-left: 0px;
+        }
+
+        .c-photo .c-photo-list .c-photo-list-item-right a {
+            border: 0px solid #ddd;
+            /*padding: 20px 15px 0px 0px;*/
+            font-size: 40px;
+            color: #e7e7e7;
+        }
+
+        .c-photo-list-item-right a :hover{
+            color: #337ab7;
+        }
+
+        .c-photo .c-photo-list .thumbnail{
+            margin-bottom: 0px;
         }
 
         .c-photo .c-photo-img-wrapper img{
-            height: 180px;
+            height: 80px;
+            width: 80px;
             display: block;
         }
+
+        .c-photo .c-photo-img-wrapper span{
+            font-size: 45px;
+            height: 80px;
+            width: 80px;
+        }
+
 
 
     </style>
@@ -107,30 +163,8 @@
 
 <div class="row c-photo">
 
-    <div class="col-lg-2 c-photo-list">
 
-
-        <div class="">
-            <a href="#" class="thumbnail c-photo-img-wrapper">
-                <img src="apro/img/blue.jpg" alt="...">
-            </a>
-        </div>
-
-        <div class="">
-            <a href="#" class="thumbnail c-photo-img-wrapper">
-                <img src="apro/img/green.jpg" alt="...">
-            </a>
-        </div>
-
-        <div class="">
-            <a href="#" class="thumbnail c-photo-img-wrapper">
-                <img src="apro/img/red.jpg" alt="...">
-            </a>
-        </div>
-
-    </div>
-
-    <div class="col-lg-10">
+    <div >
 
         <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 0px;">
             <!-- Indicators -->
@@ -162,6 +196,82 @@
 
 
     </div>
+    <div class=" container c-photo-list ">
+
+        <div style="    width: 968px;
+    margin-left: auto;
+    margin-right: auto;">
+
+
+        <div class="c-photo-list-item c-photo-list-item-left">
+            <a href="#" class="thumbnail text-center " >
+                <span class="glyphicon glyphicon-chevron-left "
+                      aria-hidden="true"></span>
+            </a>
+        </div>
+
+
+        <div class="c-photo-list-item">
+            <a href="#" class="thumbnail c-photo-img-wrapper">
+                <img src="apro/img/blue.jpg" alt="...">
+            </a>
+        </div>
+
+        <div class="c-photo-list-item">
+            <a href="#" class="thumbnail c-photo-img-wrapper">
+                <img src="apro/img/green.jpg" alt="...">
+            </a>
+        </div>
+
+        <div class="c-photo-list-item">
+            <a href="#" class="thumbnail c-photo-img-wrapper">
+                <img src="apro/img/red.jpg" alt="...">
+            </a>
+        </div>
+
+        <div class="c-photo-list-item">
+            <a href="#" class="thumbnail c-photo-img-wrapper">
+                <img src="apro/img/blue.jpg" alt="...">
+            </a>
+        </div>
+
+        <div class="c-photo-list-item">
+            <a href="#" class="thumbnail c-photo-img-wrapper">
+                <img src="apro/img/green.jpg" alt="...">
+            </a>
+        </div>
+
+        <div class="c-photo-list-item">
+            <a href="#" class="thumbnail c-photo-img-wrapper">
+                <img src="apro/img/red.jpg" alt="...">
+            </a>
+        </div>
+
+            <div class="c-photo-list-item">
+                <a href="#" class="thumbnail c-photo-img-wrapper">
+                    <img src="apro/img/green.jpg" alt="...">
+                </a>
+            </div>
+
+            <div class="c-photo-list-item">
+                <a href="#" class="thumbnail c-photo-img-wrapper">
+                    <img src="apro/img/red.jpg" alt="...">
+                </a>
+            </div>
+
+
+
+        <div class="c-photo-list-item c-photo-list-item-right ">
+            <a href="#" class="thumbnail text-center " >
+                <span class="glyphicon glyphicon-chevron-right "
+                      aria-hidden="true"></span>
+            </a>
+        </div>
+
+        </div>
+
+    </div>
+
 
 </div>
 
