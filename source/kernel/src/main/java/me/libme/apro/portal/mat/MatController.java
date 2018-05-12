@@ -10,8 +10,8 @@ import me.libme.kernel._c._m.JPage;
 import me.libme.kernel._c._m.SimplePageRequest;
 import me.libme.kernel._c.util.JStringUtils;
 import me.libme.webboot.ResponseModel;
-import me.libme.webseed._b._core.sysparam.service.SysParamService;
 import me.libme.webseed.fn.kv.CodeDictService;
+import me.libme.webseed.fn.kv.SysParamDictService;
 import me.libme.webseed.fn.mock.Mock;
 import me.libme.webseed.web.NoClosureException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +49,11 @@ public class MatController {
     private CodeDictService codeDictService;
 
     @Autowired
-    private SysParamService sysParamService;
+    private SysParamDictService sysParamDictService;
 
 
     private int pageSize() throws Exception{
-        String val=sysParamService.getVal(Cons.Sys.MAT_PAGE_SIZE).getValue();
+        String val=sysParamDictService.val(Cons.Sys.MAT_PAGE_SIZE);
         return Integer.parseInt(val);
     }
 
@@ -206,7 +206,8 @@ public class MatController {
 
         int pageNum=0;
         JPage<MatRecord> matRecordJPage=matAccessService.search(new MatCriteria(),
-                new SimplePageRequest(pageNum,Integer.parseInt(sysParamService.getVal("MAT_REC_SIZE").getValue())));
+                new SimplePageRequest(pageNum,Integer.parseInt(
+                        sysParamDictService.val(Cons.Sys.MAT_REC_SIZE))));
         model.addAttribute("page",matRecordJPage);
 
         return "/mat-recommend";

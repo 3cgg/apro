@@ -18,6 +18,8 @@ public interface Cons {
 
     interface Sys{
         String MAT_PAGE_SIZE="MAT_PAGE_SIZE";
+
+        String MAT_REC_SIZE="MAT_REC_SIZE";
     }
 
 

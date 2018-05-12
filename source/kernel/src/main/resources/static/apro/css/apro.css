@@ -179,7 +179,7 @@ body {
 }
 
 .c-mat-group .c-mat-group-list{
-
+    text-align: center;
 }
 
 .c-mat-group .c-mat-group-list a:hover img{
@@ -256,6 +256,11 @@ body {
     /*color: transparent;*/
 }
 
+
+.body{
+
+    background-color: transparent;
+}
 
 
 

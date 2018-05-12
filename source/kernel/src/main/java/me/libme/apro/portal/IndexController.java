@@ -2,10 +2,10 @@ package me.libme.apro.portal;
 
 import me.libme.apro.admin._mat.matcategory.service.MatCategoryService;
 import me.libme.webseed._b._core.codetable.service.CodeTableService;
-import me.libme.webseed._b._core.sysparam.service.SysParamService;
 import me.libme.webseed.cms.colmanager.service.ColManagerService;
 import me.libme.webseed.cms.colmanager.vo.ColContentRecord;
 import me.libme.webseed.cms.content.vo.ContentCriteria;
+import me.libme.webseed.fn.kv.SysParamDictService;
 import me.libme.webseed.web.NoClosureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class IndexController {
     private CodeTableService codeTableService;
 
     @Autowired
-    private SysParamService sysParamService;
+    private SysParamDictService sysParamDictService;
 
     @Autowired
     private ColManagerService colManagerService;
@@ -38,10 +38,6 @@ public class IndexController {
     @NoClosureException
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(Model model) throws Exception{
-
-//        SysParamRecord sysParamRecord=sysParamService.getVal(Cons.MAT_CATEGORY_GROUP);
-//
-//        List<ParamCode> paramCodes=codeTableService.getAllParamCodesByType(sysParamRecord.getValue());
 
         List<ColContentRecord> colContentRecords=
                 colManagerService.getColContents(Cons.CMS.INDEX_IMG_GROUP,new ContentCriteria());
