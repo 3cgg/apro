@@ -20,6 +20,8 @@ public interface Cons {
         String MAT_PAGE_SIZE="MAT_PAGE_SIZE";
 
         String MAT_REC_SIZE="MAT_REC_SIZE";
+
+        String PHOTO_LIST_SIZE="PHOTO_LIST_SIZE";
     }
 
 

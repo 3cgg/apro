@@ -43,6 +43,7 @@ public class PhotoService  {
 	 */
 	public String savePhoto (PhotoRecord photoRecord) throws Exception{
 		Photo photo=toPhoto(photoRecord);
+		photo.setCompressImg(photoRecord.getImg());
 		photoRepo.saveOnly( photo);
         return photo.getId();
 	}
@@ -55,9 +56,10 @@ public class PhotoService  {
 		Photo dbPhoto=photoRepo.active(photoRecord.getId());
 
         dbPhoto.setImg(photoRecord.getImg());
-        dbPhoto.setCompressImg(photoRecord.getCompressImg());
+        dbPhoto.setCompressImg(photoRecord.getImg());
         dbPhoto.setDescription(photoRecord.getDescription());
         dbPhoto.setMatId(photoRecord.getMatId());
+
         photoRepo.updateOnly(dbPhoto);
 	}
 

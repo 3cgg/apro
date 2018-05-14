@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN"   xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+</head>
+<body>
+
+<!--<div class="">-->
+<!--<a href="#"><img class="img-thumbnail" src="apro/img/blue.jpg" alt="..."></a>-->
+<!--<div class="caption text-center">-->
+<!--<p>蓝色布料</p>-->
+
+<!--</div>-->
+<!--</div>-->
+
+<div class=" container c-photo-list " th:fragment="copy" >
+
+    <div style="    width: 968px;
+    margin-left: auto;
+    margin-right: auto;"  th:attr="data-img-index=0"  name="imgListDiv">
+
+
+        <div class="c-photo-list-item c-photo-list-item-left">
+            <a href="#" class="thumbnail text-center "
+               th:attr="data-page-number=${(pageNumber-1)<0}?0:${pageNumber-1}"
+            >
+                <span class="glyphicon glyphicon-chevron-left "
+                      aria-hidden="true"></span>
+            </a>
+        </div>
+
+
+        <div class="c-photo-list-item"
+             th:each="photo : ${page.content}"
+        >
+            <a href="#" class="thumbnail c-photo-img-wrapper" name="compressImg"
+               th:attr="data-img-uri=${photo.imgFile.uri}"
+
+               th:attrappend="data-photo-id=${photo.id},data-img-index=${photoStat.index}"
+
+
+            >
+                <img src="apro/img/blue.jpg"  th:src="${photo.compressImgFile.uri}" alt="...">
+            </a>
+        </div>
+
+        <!--<div class="c-photo-list-item">-->
+            <!--<a href="#" class="thumbnail c-photo-img-wrapper">-->
+                <!--<img src="apro/img/green.jpg" alt="...">-->
+            <!--</a>-->
+        <!--</div>-->
+
+        <!--<div class="c-photo-list-item">-->
+            <!--<a href="#" class="thumbnail c-photo-img-wrapper">-->
+                <!--<img src="apro/img/red.jpg" alt="...">-->
+            <!--</a>-->
+        <!--</div>-->
+
+        <!--<div class="c-photo-list-item">-->
+            <!--<a href="#" class="thumbnail c-photo-img-wrapper">-->
+                <!--<img src="apro/img/blue.jpg" alt="...">-->
+            <!--</a>-->
+        <!--</div>-->
+
+        <!--<div class="c-photo-list-item">-->
+            <!--<a href="#" class="thumbnail c-photo-img-wrapper">-->
+                <!--<img src="apro/img/green.jpg" alt="...">-->
+            <!--</a>-->
+        <!--</div>-->
+
+        <!--<div class="c-photo-list-item">-->
+            <!--<a href="#" class="thumbnail c-photo-img-wrapper">-->
+                <!--<img src="apro/img/red.jpg" alt="...">-->
+            <!--</a>-->
+        <!--</div>-->
+
+        <!--<div class="c-photo-list-item">-->
+            <!--<a href="#" class="thumbnail c-photo-img-wrapper">-->
+                <!--<img src="apro/img/green.jpg" alt="...">-->
+            <!--</a>-->
+        <!--</div>-->
+
+        <!--<div class="c-photo-list-item">-->
+            <!--<a href="#" class="thumbnail c-photo-img-wrapper">-->
+                <!--<img src="apro/img/red.jpg" alt="...">-->
+            <!--</a>-->
+        <!--</div>-->
+
+
+
+        <div class="c-photo-list-item c-photo-list-item-right ">
+            <a href="#" class="thumbnail text-center "
+               th:attr="data-page-number=${(pageNumber+1)<totalPageNumber}?${pageNumber+1}:${totalPageNumber}"
+            >
+                <span class="glyphicon glyphicon-chevron-right "
+                      aria-hidden="true"></span>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<!--<div class="">-->
+<!--<a href="#"><img class="img-thumbnail" src="apro/img/green.jpg" alt="..."></a>-->
+<!--<div class="caption text-center">-->
+<!--<p>绿色布料</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="">-->
+<!--<a href="#"><img class="img-thumbnail" src="apro/img/red.jpg" alt="..."></a>-->
+<!--<div class="caption text-center">-->
+<!--<p>红色布料</p>-->
+<!--</div>-->
+<!--</div>-->
+
+</body>
+</html>
