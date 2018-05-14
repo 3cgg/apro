@@ -97,4 +97,20 @@ public class TestMat  {
     }
 
 
+    @Test
+    public void generatePhoto() throws Exception{
+
+        Config config=new Config();
+        config.setModelPath("D:\\java_\\git\\apro\\source\\kernel\\src\\main\\java\\me\\libme\\apro\\admin\\photo\\model");
+        config.setUiRelativePath("c:\\file");
+
+        config.setModuleName("Photo");
+
+        config.addUIField(new Config.FieldConfig("description", "描述"));
+
+        TemplateRunner.start(config);
+    }
+
+
+
 }
