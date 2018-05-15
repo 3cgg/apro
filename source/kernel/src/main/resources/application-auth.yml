@@ -1,0 +1,17 @@
+cpp :
+    auth :
+        authentication : true
+        authorization : true
+        url :
+            exclude :
+                - ^/portal/.*
+                - ^/codetablemanager/.*
+                - ^/menumanager/.*
+                - ^/sysctl/.*
+                - swagger
+                - /v2/.*
+                - /[_]mock[_]/.*
+    
+    
+    
+    
