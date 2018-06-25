@@ -24,7 +24,7 @@ public class ContactController {
     public String detail(Model model) throws Exception{
         ContactRecord contactRecord=contactService.getContact();
         model.addAttribute("contact",contactRecord);
-        return "/contact";
+        return "contact";
     }
 
 

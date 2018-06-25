@@ -47,7 +47,7 @@ public class IndexController {
                 colManagerService.getColContents(Cons.CMS.INDEX_BANNER,new ContentCriteria());
         model.addAttribute("banners",banners);
 
-        return "/index";
+        return "index";
     }
 
 

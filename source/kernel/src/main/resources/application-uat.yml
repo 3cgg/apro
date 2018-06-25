@@ -98,10 +98,10 @@ cpp :
          default-password : 11111
     file : 
          dsk-path : C:/java_/__data__/file-store/   #simple file directory
-         host : http://localhost:8888/ #IP地址 指定文件存储的地址
+         host : http://100.100.190.169:8888/ #IP地址 指定文件存储的地址
     temp-file :
          temp-dsk-path : C:/java_/__data__/temp-file-store/   #simple file directory
-         temp-host : http://localhost:9898/ #IP地址 指定文件存储的地址
+         temp-host : http://100.100.190.169:9898/ #IP地址 指定文件存储的地址
     url :
          method-track-switch : true #true is on , false is off
     kaptcha :
@@ -121,7 +121,7 @@ cpp :
               - me.libme
     ueditor :
          root-path : C:/java_/__data__/file-store-ueditor/   #simple file directory
-         host : http://localhost:8901/ #IP地址 指定文件存储的地址
+         host : http://100.100.190.169:8901/ #IP地址 指定文件存储的地址
     
     
     

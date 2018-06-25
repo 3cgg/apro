@@ -24,7 +24,7 @@ public class AboutusController {
     public String detail(Model model) throws Exception{
         AboutUsRecord aboutUsRecord=aboutusService.getAboutUs();
         model.addAttribute("aboutus",aboutUsRecord);
-        return "/about";
+        return "about";
     }
 
 

@@ -35,14 +35,14 @@ public class EventController {
     public String detail(Model model,@RequestParam(name = "contentId") String contentId) throws Exception{
         ContentRecord contentRecord=contentManagerService.getContentById(contentId);
         model.addAttribute("event",contentRecord);
-        return "/event-detail";
+        return "event-detail";
     }
 
     @RequestMapping(value ="/list", method = RequestMethod.GET)
     public String list(Model model) throws Exception{
         List<ColContentRecord> contentRecords= colManagerService.getColContents(Cons.CMS.EVENT,new ContentCriteria());
         model.addAttribute("events",contentRecords);
-        return "/event";
+        return "event";
     }
 
 }

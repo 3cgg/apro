@@ -1,0 +1,10 @@
+spring : 
+    application:
+         name: webseed
+    profiles : 
+         active :
+#              - dev
+              - dev-error
+              - assist
+              - auth
+              - uat

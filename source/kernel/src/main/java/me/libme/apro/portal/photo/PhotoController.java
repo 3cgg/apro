@@ -56,7 +56,7 @@ public class PhotoController {
         model.addAttribute("page",photoRecordPage);
         model.addAttribute("pageNumber",pageNum);
         model.addAttribute("totalPageNumber",photoRecordPage.getTotalPageNumber());
-        return "/photos";
+        return "photos";
     }
 
 //    private MatRecord toPortal(me.libme.apro.admin._mat.mat.vo.MatRecord matRecord){
@@ -85,7 +85,7 @@ public class PhotoController {
         model.addAttribute("page",photoRecordPage);
         model.addAttribute("pageNumber",pageNum);
         model.addAttribute("totalPageNumber",photoRecordPage.getTotalPageNumber());
-        return "/photo-quick";
+        return "photo-quick";
     }
 
 

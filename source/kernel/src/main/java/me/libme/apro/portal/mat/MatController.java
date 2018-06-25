@@ -123,7 +123,7 @@ public class MatController {
         model.addAttribute("keyword",JStringUtils.isNullOrEmpty(keyword)?"":keyword);
         model.addAttribute("selectedCategory",JStringUtils.isNullOrEmpty(category)?"":category);
 
-        return "/mat";
+        return "mat";
     }
 
 //    private MatRecord toPortal(me.libme.apro.admin._mat.mat.vo.MatRecord matRecord){
@@ -196,7 +196,7 @@ public class MatController {
         me.libme.apro.admin._mat.mat.vo.MatRecord matRecord= matService.getMatById(id);
         model.addAttribute("matRecord",matRecord);
 
-        return "/mat-detail";
+        return "mat-detail";
     }
 
 
@@ -210,7 +210,7 @@ public class MatController {
                         sysParamDictService.val(Cons.Sys.MAT_REC_SIZE))));
         model.addAttribute("page",matRecordJPage);
 
-        return "/mat-recommend";
+        return "mat-recommend";
     }
 
 
