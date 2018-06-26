@@ -62,7 +62,7 @@ logging:
     level:
          me.libme : DEBUG
          #org.springframework: DEBUG
-    
+    config : classpath:log4j2-dev.xml
 cpp : 
     name : webseed
     security-key : _you_@never@_known@aha_3cgg@163.com_

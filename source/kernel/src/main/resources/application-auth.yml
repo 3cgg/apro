@@ -11,6 +11,7 @@ cpp :
                 - swagger
                 - /v2/.*
                 - /[_]mock[_]/.*
+                - ^/file/.*
     
     
     

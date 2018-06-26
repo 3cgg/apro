@@ -3,7 +3,7 @@ spring :
          admin.enabled : true #MBeanServer
     datasource :
          driver-class-name : com.mysql.jdbc.Driver
-         url : jdbc:mysql://localhost:3306/apro?useUnicode=true&characterEncoding=utf8&useSSL=false
+         url : jdbc:mysql://192.168.0.114:3306/apro?useUnicode=true&characterEncoding=utf8&useSSL=false
          username : root
          password : jiazhongjin
          #driver-class-name : org.h2.Driver
@@ -59,9 +59,10 @@ server :
 management : 
     security.enabled : false
 logging:
-    level:
-         me.libme : DEBUG
+    level :
+#         me.libme : DEBUG
          #org.springframework: DEBUG
+    config : classpath:log4j2-uat.xml
     
 cpp : 
     name : webseed
@@ -97,10 +98,10 @@ cpp :
     user :
          default-password : 11111
     file : 
-         dsk-path : C:/java_/__data__/file-store/   #simple file directory
+         dsk-path : /work/runtime/__data__/file-store/   #simple file directory
          host : http://100.100.190.169:8888/ #IP地址 指定文件存储的地址
     temp-file :
-         temp-dsk-path : C:/java_/__data__/temp-file-store/   #simple file directory
+         temp-dsk-path : /work/runtime/__data__/temp-file-store/   #simple file directory
          temp-host : http://100.100.190.169:9898/ #IP地址 指定文件存储的地址
     url :
          method-track-switch : true #true is on , false is off
@@ -120,7 +121,7 @@ cpp :
               - me.libme  # never set *
               - me.libme
     ueditor :
-         root-path : C:/java_/__data__/file-store-ueditor/   #simple file directory
+         root-path : /work/runtime/__data__/file-store-ueditor/   #simple file directory
          host : http://100.100.190.169:8901/ #IP地址 指定文件存储的地址
     
     
